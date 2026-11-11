@@ -16,13 +16,13 @@ et avec eux l’eau, les communications
 et la continuité des services essentiels.
 
 5
-00:00:38,237 --> 00:00:43,061
-Le projet pilote porté par le Syndicat départemental
-d’énergie de Haute-Corse
+00:00:38,237 --> 00:00:41,699
+Porté par le Syndicat départemental
+d’énergie de Haute-Corse,
 
 6
-00:00:43,101 --> 00:00:45,562
-en fait un laboratoire territorial.
+00:00:41,739 --> 00:00:44,243
+c’est le prototype du village de demain.
 
 7
 00:00:45,712 --> 00:00:49,065
@@ -116,68 +116,62 @@ mairie-refuge, communications,
 alimentation en eau et éclairage de sécurité.
 
 28
-00:01:50,115 --> 00:01:53,610
-Dans le modèle, l’objectif est de tenir
-soixante-douze heures :
+00:01:50,115 --> 00:01:52,867
+Ce modèle est conçu pour tenir plusieurs jours.
 
 29
-00:01:53,650 --> 00:01:56,817
-une hypothèse que l’expérimentation
-devra confirmer.
-
-30
 00:01:57,967 --> 00:01:59,988
 La plateforme est aussi numérique.
 
-31
+30
 00:02:00,028 --> 00:02:03,047
 Capteurs environnementaux, vigie incendie,
 
-32
+31
 00:02:03,087 --> 00:02:05,078
 réseau radio secouru et suivi des consommations
 
-33
+32
 00:02:05,118 --> 00:02:08,217
 alimentent un jumeau numérique du village.
 
-34
+33
 00:02:08,467 --> 00:02:12,206
 À partir de ces données,
 l’intelligence artificielle doit aider
 
-35
+34
 00:02:12,246 --> 00:02:14,919
 à anticiper les risques, à optimiser les ressources
 
-36
+35
 00:02:14,959 --> 00:02:16,663
 et à éclairer la décision.
 
-37
+36
 00:02:16,913 --> 00:02:19,456
 La gestion de l’eau, l’agriculture instrumentée
 
-38
+37
 00:02:19,496 --> 00:02:22,873
 et la recharge des véhicules
 relèvent du même système.
 
-39
-00:02:24,023 --> 00:02:28,188
-Ce projet pilote se veut une plateforme
-de recherche reproductible.
+38
+00:02:24,023 --> 00:02:27,542
+Ce prototype du village de demain
+se veut reproductible.
 
-40
+39
 00:02:28,228 --> 00:02:32,433
 Collectivités, chercheurs et industriels
 pourront y expérimenter des technologies
 
-41
+40
 00:02:32,473 --> 00:02:35,128
 en conditions réelles, en mesurer les performances,
 
-42
+41
 00:02:35,168 --> 00:02:39,197
 et étudier leur déploiement
 dans d’autres territoires ruraux.

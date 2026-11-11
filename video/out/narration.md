@@ -1,6 +1,6 @@
 # Smart Paese — texte de la narration
 
-Film institutionnel et scientifique · durée 2:47 · 307 mots · voix off en français.
+Film institutionnel et scientifique · durée 2:47 · 297 mots · voix off en français.
 
 Les repères de temps indiquent le début de chaque séquence dans le film.
 
@@ -14,7 +14,7 @@ Ce village dépend d’une seule ligne électrique. Isolement, incendies, séche
 
 ## 2. Le concept Smart Paese  ·  0:38
 
-Le projet pilote porté par le Syndicat départemental d’énergie de Haute-Corse en fait un laboratoire territorial. Production, stockage, capteurs et réseaux y sont reliés pour concevoir, tester et évaluer des solutions de résilience.
+Porté par le Syndicat départemental d’énergie de Haute-Corse, c’est le prototype du village de demain. Production, stockage, capteurs et réseaux y sont reliés pour concevoir, tester et évaluer des solutions de résilience.
 
 ## 3. L’énergie  ·  0:53
 
@@ -22,7 +22,7 @@ Premier champ d’étude : l’énergie. Sur les toits publics et l’ombrière,
 
 ## 4. La résilience face aux crises  ·  1:26
 
-Que se passe-t-il si la ligne est interrompue ? En fonctionnement normal, le réseau complète la production locale. En mode dégradé, le village s’isolerait. La batterie reformerait le réseau ; le solaire et le torrent viendraient la recharger. L’énergie serait alors réservée aux équipements prioritaires : mairie-refuge, communications, alimentation en eau et éclairage de sécurité. Dans le modèle, l’objectif est de tenir soixante-douze heures : une hypothèse que l’expérimentation devra confirmer.
+Que se passe-t-il si la ligne est interrompue ? En fonctionnement normal, le réseau complète la production locale. En mode dégradé, le village s’isolerait. La batterie reformerait le réseau ; le solaire et le torrent viendraient la recharger. L’énergie serait alors réservée aux équipements prioritaires : mairie-refuge, communications, alimentation en eau et éclairage de sécurité. Ce modèle est conçu pour tenir plusieurs jours.
 
 ## 5. Données, intelligence artificielle, infrastructures connectées  ·  1:57
 
@@ -30,7 +30,7 @@ La plateforme est aussi numérique. Capteurs environnementaux, vigie incendie, r
 
 ## 6. Une plateforme de recherche reproductible  ·  2:24
 
-Ce projet pilote se veut une plateforme de recherche reproductible. Collectivités, chercheurs et industriels pourront y expérimenter des technologies en conditions réelles, en mesurer les performances, et étudier leur déploiement dans d’autres territoires ruraux.
+Ce prototype du village de demain se veut reproductible. Collectivités, chercheurs et industriels pourront y expérimenter des technologies en conditions réelles, en mesurer les performances, et étudier leur déploiement dans d’autres territoires ruraux.
 
 ## Titre de fin
 
