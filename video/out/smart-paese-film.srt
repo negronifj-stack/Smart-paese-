@@ -1,186 +1,185 @@
 1
-00:00:11,200 --> 00:00:12,791
-Au cœur de la montagne corse,
+00:00:16,200 --> 00:00:18,865
+Ce village dépend d’une seule ligne électrique.
 
 2
-00:00:12,831 --> 00:00:15,560
-ce village dépend d’une seule ligne électrique.
-
-3
-00:00:15,760 --> 00:00:18,250
+00:00:20,760 --> 00:00:23,250
 Isolement, incendies, sécheresses, tempêtes :
 
-4
-00:00:18,290 --> 00:00:21,280
+3
+00:00:23,290 --> 00:00:26,280
 ici, chaque aléa climatique fragilise les réseaux,
 
-5
-00:00:21,320 --> 00:00:25,887
+4
+00:00:26,320 --> 00:00:30,887
 et avec eux l’eau, les communications
 et la continuité des services essentiels.
 
+5
+00:00:32,037 --> 00:00:34,741
+Le projet pilote porté par le SDE2B
+
 6
-00:00:27,037 --> 00:00:30,984
-Le village intelligent en fait
-un laboratoire territorial.
+00:00:34,781 --> 00:00:37,108
+en fait un laboratoire territorial.
 
 7
-00:00:31,024 --> 00:00:35,994
+00:00:37,258 --> 00:00:40,651
 Production, stockage, capteurs et réseaux
-y sont reliés au sein d’une même plateforme,
+y sont reliés
 
 8
-00:00:36,034 --> 00:00:38,103
+00:00:40,691 --> 00:00:42,610
 pour concevoir, tester et évaluer,
 
 9
-00:00:38,143 --> 00:00:41,189
+00:00:42,650 --> 00:00:45,772
 en conditions réelles, des solutions de résilience.
 
 10
-00:00:42,339 --> 00:00:44,277
+00:00:47,339 --> 00:00:49,277
 Premier champ d’étude : l’énergie.
 
 11
-00:00:44,317 --> 00:00:46,317
+00:00:49,317 --> 00:00:51,317
 Sur les toits publics et l’ombrière,
 
 12
-00:00:46,357 --> 00:00:49,387
+00:00:51,357 --> 00:00:54,387
 le photovoltaïque produit au plus près des usages.
 
 13
-00:00:49,637 --> 00:00:52,819
+00:00:54,637 --> 00:00:57,819
 Sur le torrent, une conduite forcée
 met l’eau sous pression.
 
 14
-00:00:52,859 --> 00:00:54,538
+00:00:57,859 --> 00:00:59,538
 Le jet entraîne une roue Pelton,
 
 15
-00:00:54,578 --> 00:00:56,977
+00:00:59,578 --> 00:01:01,977
 dont l’alternateur produit jour et nuit.
 
 16
-00:00:57,227 --> 00:01:00,319
+00:01:02,227 --> 00:01:05,319
 Une batterie communale stocke
 l’énergie de la mi-journée
 
 17
-00:01:00,359 --> 00:01:02,623
+00:01:05,359 --> 00:01:07,623
 et conserve une réserve de sécurité.
 
 18
-00:01:02,873 --> 00:01:08,131
+00:01:07,873 --> 00:01:13,131
 L’hydrogène est étudié comme une piste
 de stockage complémentaire, de plus longue durée.
 
 19
-00:01:08,381 --> 00:01:10,892
+00:01:13,381 --> 00:01:15,892
 Un pilotage intelligent arbitre en continu
 
 20
-00:01:10,932 --> 00:01:14,091
+00:01:15,932 --> 00:01:19,091
 entre production, stockage et consommation.
 
 21
-00:01:15,241 --> 00:01:17,867
+00:01:20,241 --> 00:01:22,867
 Que se passe-t-il si la ligne est interrompue ?
 
 22
-00:01:18,317 --> 00:01:22,365
+00:01:23,317 --> 00:01:27,365
 En fonctionnement normal,
 le réseau complète la production locale.
 
 23
-00:01:22,615 --> 00:01:25,052
+00:01:27,615 --> 00:01:30,052
 En mode dégradé, le village s’isolerait.
 
 24
-00:01:25,092 --> 00:01:27,030
+00:01:30,092 --> 00:01:32,030
 La batterie reformerait le réseau ;
 
 25
-00:01:27,070 --> 00:01:29,810
+00:01:32,070 --> 00:01:34,810
 le solaire et le torrent viendraient la recharger.
 
 26
-00:01:30,060 --> 00:01:33,705
+00:01:35,060 --> 00:01:38,705
 L’énergie serait alors réservée
 aux équipements prioritaires :
 
 27
-00:01:33,745 --> 00:01:35,631
+00:01:38,745 --> 00:01:40,631
 mairie-refuge, communications,
 
 28
-00:01:35,671 --> 00:01:38,665
+00:01:40,671 --> 00:01:43,665
 alimentation en eau et éclairage de sécurité.
 
 29
-00:01:38,915 --> 00:01:42,410
+00:01:43,915 --> 00:01:47,410
 Dans le modèle, l’objectif est de tenir
 soixante-douze heures :
 
 30
-00:01:42,450 --> 00:01:45,617
+00:01:47,450 --> 00:01:50,617
 une hypothèse que l’expérimentation
 devra confirmer.
 
 31
-00:01:46,767 --> 00:01:48,788
+00:01:51,767 --> 00:01:53,788
 La plateforme est aussi numérique.
 
 32
-00:01:48,828 --> 00:01:51,847
+00:01:53,828 --> 00:01:56,847
 Capteurs environnementaux, vigie incendie,
 
 33
-00:01:51,887 --> 00:01:53,878
+00:01:56,887 --> 00:01:58,878
 réseau radio secouru et suivi des consommations
 
 34
-00:01:53,918 --> 00:01:57,017
+00:01:58,918 --> 00:02:02,017
 alimentent un jumeau numérique du village.
 
 35
-00:01:57,267 --> 00:02:01,006
+00:02:02,267 --> 00:02:06,006
 À partir de ces données,
 l’intelligence artificielle doit aider
 
 36
-00:02:01,046 --> 00:02:03,719
+00:02:06,046 --> 00:02:08,719
 à anticiper les risques, à optimiser les ressources
 
 37
-00:02:03,759 --> 00:02:05,463
+00:02:08,759 --> 00:02:10,463
 et à éclairer la décision.
 
 38
-00:02:05,713 --> 00:02:08,256
+00:02:10,713 --> 00:02:13,256
 La gestion de l’eau, l’agriculture instrumentée
 
 39
-00:02:08,296 --> 00:02:11,673
+00:02:13,296 --> 00:02:16,673
 et la recharge des véhicules
 relèvent du même système.
 
 40
-00:02:12,823 --> 00:02:16,626
-Ce village se veut une plateforme
+00:02:17,823 --> 00:02:21,988
+Ce projet pilote se veut une plateforme
 de recherche reproductible.
 
 41
-00:02:17,028 --> 00:02:21,233
+00:02:22,028 --> 00:02:26,233
 Collectivités, chercheurs et industriels
 pourront y expérimenter des technologies
 
 42
-00:02:21,273 --> 00:02:23,928
+00:02:26,273 --> 00:02:28,928
 en conditions réelles, en mesurer les performances,
 
 43
-00:02:23,968 --> 00:02:27,997
+00:02:28,968 --> 00:02:32,997
 et étudier leur déploiement
 dans d’autres territoires ruraux.

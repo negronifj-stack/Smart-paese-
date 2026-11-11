@@ -69,7 +69,7 @@ return [
 { id: "1-aube", seq: 1, bare: true, at: 0, xf: 0,
   state: (lt, u) => day(ETE, lerp(7.45, 8.05, u)),
   cam: orbit({ c: [12, 24, 22], r: [262, 228], az: [-176, -162], h: [124, 96], fov: [38, 38] }),
-  sup: { k: "Haute-Corse", h: "Village de montagne — maquette numérique d’un village type", in: 1.6, out: 5.2 } },
+  sup: { k: "Castagniccia · Haute-Corse", h: "Maquette numérique d’un village type", in: 1.6, out: 5.2 } },
 { id: "1-ligne", bare: true, at: S("1a") + 2.0, xf: 0,
   state: (lt, u) => day(ETE, 9.2 + u * .2),
   cam: move({ p: [g(-236, -150, 40), g(-186, -108, 34)], t: [g(-110, -70, 10), g(-60, -34, 10)], fov: [40, 40] }),

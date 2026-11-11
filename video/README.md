@@ -1,6 +1,6 @@
 # Smart Paese — film institutionnel et scientifique
 
-Film de présentation du dispositif Smart Paese, en Full HD (1920 × 1080, 25 images/s, 2 min 37),
+Film de présentation du dispositif Smart Paese, en Full HD (1920 × 1080, 25 images/s, 2 min 42),
 avec voix off française, ambiance sonore et sous-titres. Il est produit à partir de l'artéfact HTML
 Smart Paese : même scène 3D du village, mêmes ateliers 3D (pico-centrale, batterie, hydrogène, îlotage),
 même modèle énergétique horaire.
@@ -16,9 +16,10 @@ même modèle énergétique horaire.
 
 ## L'ouverture et les six séquences
 
-0. **Ouverture** (8 s, sans voix) — logo du Syndicat départemental d'énergie de Haute-Corse, puis zoom cartographique de la
-   Méditerranée occidentale à la Haute-Corse et au village pilote, en Castagniccia. Les contours viennent de l'artéfact
-   « Projet de mandature » (`../artifact-mandature/data/geo.js`) ; l'emplacement du village est celui de son atlas, donné comme indicatif.
+0. **Ouverture** (13 s, sans voix) — logo du Syndicat départemental d'énergie de Haute-Corse, puis carte de la Haute-Corse
+   où s'allument les politiques du projet de mandature (éclairage public LED par tranches, stations de recharge, projets
+   solaires de la SEM), avant le zoom sur le village pilote, en Castagniccia. Contours, sites et chiffres viennent de
+   l'artéfact « Projet de mandature » (`../artifact-mandature/data/`) ; l'atlas les donne comme illustratifs, et l'écran le dit.
 
 1. **Le territoire et ses vulnérabilités** — vue aérienne du village, ligne électrique unique, départ de feu, coupure d'hiver.
 2. **Le concept Smart Paese** — les équipements s'installent un à un, puis leurs interconnexions apparaissent.
