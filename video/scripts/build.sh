@@ -12,7 +12,7 @@ python3 scripts/audio.py                       # build/audio.wav
 python3 scripts/subs.py                        # out/*.srt, out/*.vtt, out/narration.md
 # build/picture.mp4 est un intermédiaire de haute qualité (≈ 25 Mbit/s) ; l'export final vise un fichier diffusable (< 100 Mo)
 ffmpeg -y -loglevel error -i build/picture.mp4 -i build/audio.wav -map 0:v -map 1:a \
-  -c:v libx264 -preset slow -crf "${CRF:-23}" -maxrate 8M -bufsize 16M -pix_fmt yuv420p -g 50 -bf 2 \
+  -c:v libx264 -preset slow -crf "${CRF:-25}" -maxrate 6M -bufsize 12M -pix_fmt yuv420p -g 50 -bf 2 \
   -colorspace bt709 -color_primaries bt709 -color_trc bt709 \
   -af "loudnorm=I=-16:TP=-1.5:LRA=11" -ar 48000 -c:a aac -b:a 192k -shortest -movflags +faststart \
   -metadata title="Smart Paese — Programme de recherche et d’expérimentation pour la résilience des territoires ruraux" \
