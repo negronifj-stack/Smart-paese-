@@ -42,9 +42,9 @@ Ce n'est ni une capture d'écran ni un diaporama : chaque image est calculée s�
 - `scripts/render.mjs` pilote Chromium (Playwright), capture chaque image et l'envoie à FFmpeg.
 - `scripts/voice.py` synthétise la voix off phrase par phrase et en déduit le minutage : **c'est la voix qui cale le montage**.
 - `film/intro.html` et `film/intro.js` dessinent l'ouverture (logo dans `film/assets/`, carte en 2D).
-- `scripts/audio.py` synthétise la musique (arpèges de cordes pincées, basse, nappe légère) et les ambiances (air, eau,
+- `scripts/audio.py` synthétise la musique (arpèges de cordes tenues et piano feutré) et les ambiances (air, eau,
   coupure), puis les mixe sous la voix. Pour une musique enregistrée, déposer un WAV (48 kHz, 16 bits) dans `music/` : il
-  remplace la musique de synthèse.
+  remplace la musique de synthèse. `SP_MUSIC=aucune python3 scripts/audio.py` donne un mixage voix et ambiances seules.
 
 Les grandeurs affichées (120 kWc, 200 kWh, 5 kW, charge critique de 6 kW, 97 % des coupures simulées tenues 72 heures)
 sont lues dans le modèle de l'artéfact ou calculées par lui au moment du rendu. Elles sont présentées à l'image comme des
