@@ -8,6 +8,7 @@
    node scripts/render.mjs --stills 12,48.5     images fixes → build/stills/
    node scripts/render.mjs --contact            une image au milieu de chaque plan → build/stills/
    node scripts/render.mjs --from 30 --to 40 --out build/extrait.mp4
+   node scripts/render.mjs --page intro.html --from 0 --to 8 --out build/intro.mp4   ouverture (logo et zoom cartographique)
    Options : --workers N, --crf N, --png (capture sans perte), --ss 1.5 (suréchantillonnage), --no-subs (sans sous-titres incrustés) */
 import http from "node:http";
 import fs from "node:fs";
@@ -33,7 +34,7 @@ function sceneForFilm() {
     "apply(); flyTo(HOME.p.clone(), HOME.t.clone(), 3200);\napi.x = { scene, camera, controls, renderer, flows, sun, hemi, amb, sky, stars, terrain, pines, bush, shells, setCut, apply, bloom, HS, N, height, at, cutG, htaMat, lamps, mWin, mWinRef, mPV, water, h2, hydG, turb, fireG, tops, pelton, battG, waves, scan, vig, extra, omb, borne, pvField, wtank, ws, poste, camp, antTip, sensors, fnodes, meters, lampLight, VIG, FIRE, H2P, CHP, TUR, COL, beam, antGlow, mRoad };\nreturn api;");
   return s;
 }
-const MIME = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json", ".woff2": "font/woff2", ".woff": "font/woff" };
+const MIME = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json", ".woff2": "font/woff2", ".jpg": "image/jpeg", ".png": "image/png", ".woff": "font/woff" };
 function serve() {
   return new Promise(res => {
     const srv = http.createServer((req, rsp) => {
@@ -55,7 +56,7 @@ async function open() {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: SS });
   page.on("pageerror", e => { console.error("[page]", e.message); process.exitCode = 1; });
   page.on("console", m => { if (m.type() === "error") console.error("[console]", m.text()); });
-  await page.goto("http://127.0.0.1:" + port + "/video/film/film.html");
+  await page.goto("http://127.0.0.1:" + port + "/video/film/" + arg("page", "film.html"));
   await page.waitForFunction(() => window.Film && window.Film.ready, null, { timeout: 120000 });
   await page.evaluate(() => window.Film.ready);
   if (arg("no-subs")) await page.addStyleTag({ content: "#subs{display:none!important}" });

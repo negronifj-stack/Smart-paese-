@@ -1,6 +1,6 @@
 # Smart Paese — film institutionnel et scientifique
 
-Film de présentation du dispositif Smart Paese, en Full HD (1920 × 1080, 25 images/s, 2 min 29),
+Film de présentation du dispositif Smart Paese, en Full HD (1920 × 1080, 25 images/s, 2 min 37),
 avec voix off française, ambiance sonore et sous-titres. Il est produit à partir de l'artéfact HTML
 Smart Paese : même scène 3D du village, mêmes ateliers 3D (pico-centrale, batterie, hydrogène, îlotage),
 même modèle énergétique horaire.
@@ -14,7 +14,11 @@ même modèle énergétique horaire.
 | `out/smart-paese-film.srt`, `out/smart-paese-film.vtt` | Sous-titres synchronisés |
 | `narration.json`, `film/`, `scripts/` | Sources : tout le film se régénère à partir d'elles |
 
-## Les six séquences
+## L'ouverture et les six séquences
+
+0. **Ouverture** (8 s, sans voix) — logo du Syndicat départemental d'énergie de Haute-Corse, puis zoom cartographique de la
+   Méditerranée occidentale à la Haute-Corse et au village pilote, en Castagniccia. Les contours viennent de l'artéfact
+   « Projet de mandature » (`../artifact-mandature/data/geo.js`) ; l'emplacement du village est celui de son atlas, donné comme indicatif.
 
 1. **Le territoire et ses vulnérabilités** — vue aérienne du village, ligne électrique unique, départ de feu, coupure d'hiver.
 2. **Le concept Smart Paese** — les équipements s'installent un à un, puis leurs interconnexions apparaissent.
@@ -37,7 +41,10 @@ Ce n'est ni une capture d'écran ni un diaporama : chaque image est calculée s�
 - `film/director.js` exécute le découpage : caméra, lumière et brume de distance, fondus enchaînés, sous-titres, titre.
 - `scripts/render.mjs` pilote Chromium (Playwright), capture chaque image et l'envoie à FFmpeg.
 - `scripts/voice.py` synthétise la voix off phrase par phrase et en déduit le minutage : **c'est la voix qui cale le montage**.
-- `scripts/audio.py` synthétise l'ambiance (nappe, piano feutré, air, eau, coupure) et la mixe sous la voix.
+- `film/intro.html` et `film/intro.js` dessinent l'ouverture (logo dans `film/assets/`, carte en 2D).
+- `scripts/audio.py` synthétise la musique (arpèges de cordes pincées, basse, nappe légère) et les ambiances (air, eau,
+  coupure), puis les mixe sous la voix. Pour une musique enregistrée, déposer un WAV (48 kHz, 16 bits) dans `music/` : il
+  remplace la musique de synthèse.
 
 Les grandeurs affichées (120 kWc, 200 kWh, 5 kW, charge critique de 6 kW, 97 % des coupures simulées tenues 72 heures)
 sont lues dans le modèle de l'artéfact ou calculées par lui au moment du rendu. Elles sont présentées à l'image comme des
@@ -65,7 +72,9 @@ Il est fait par tranches de 5 s conservées dans `build/parts/` : après une ret
 | le texte dit, les sous-titres, la voix ou son débit | `narration.json` | `scripts/build.sh` (le minutage change : toute l'image est refaite) |
 | un cadrage, une annotation, un panneau | `film/shots.js` | `scripts/build.sh --redo 35-52` (intervalle en secondes) |
 | la lumière, la brume, l'habillage | `film/director.js`, `film/film.css` | `scripts/build.sh --redo all` |
-| la musique et le mixage | `scripts/audio.py` | `scripts/build.sh` (l'image n'est pas refaite) |
+| la musique et le mixage | `scripts/audio.py` ou un WAV dans `music/` | `scripts/build.sh` (l'image n'est pas refaite) |
+| une phrase de la voix, sans toucher au montage | `narration.json` | `python3 scripts/retake.py 2a 6a`, puis `scripts/build.sh --redo` sur les secondes concernées |
+| l'ouverture (logo, carte, durée) | `film/intro.js`, `"intro"` dans `narration.json` | `scripts/build.sh` |
 
 Outils de mise au point :
 

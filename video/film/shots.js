@@ -182,7 +182,7 @@ return [
       el.innerHTML = "<h3>Charge critique <b>6 kW</b></h3><div class='rows'>" + P.map(q => "<div class='r' style='--c:#E9426C;grid-template-columns:1fr auto'><span>" + q[0] + "<div class='bar'><u style='width:" + (q[1] / .55 * 100) + "%'></u></div></span><b>" + fmt(6 * 1.15 * q[1], 1) + "<small>kW</small></b></div>").join("") + "</div><p>Répartition illustrative de la charge maintenue en îlot. Hypothèse de dimensionnement, à mesurer sur site.</p>"; },
     update() {} } },
 { id: "4-72h", at: S("4e") - .35, xf: .9,
-  state: (lt, u) => cutState(lerp(11.5, 17.2, u)),
+  state: (lt, u) => cutState(lerp(15.7, 19.6, u)),          // lendemain matin de la coupure : le solaire et le torrent rechargent
   cam: orbit({ c: [0, 14, 4], r: [215, 240], az: [34, 18], h: [70, 84], fov: [38, 38] }),
   badge: { text: "Fonctionnement dégradé<small>îlotage</small>", color: "#E9426C" },
   panel: { in: .5,

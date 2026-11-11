@@ -6,6 +6,9 @@ from pathlib import Path
 import numpy as np
 ROOT = Path(__file__).resolve().parent.parent
 TL = json.loads((ROOT / "build" / "timeline.json").read_text(encoding="utf-8"))
+INTRO = float(json.loads((ROOT / "narration.json").read_text(encoding="utf-8")).get("intro", 0))
+for s_ in TL["sentences"]: s_["start"] += INTRO; s_["end"] += INTRO
+for c_ in TL["cues"]: c_["start"] += INTRO; c_["end"] += INTRO
 src = sys.argv[1] if len(sys.argv) > 1 else str(ROOT / "build" / "audio.wav")
 with wave.open(src) as f:
     sr = f.getframerate(); x = np.frombuffer(f.readframes(f.getnframes()), dtype=np.int16).reshape(-1, f.getnchannels()).astype(np.float64) / 32768

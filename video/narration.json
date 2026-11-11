@@ -1,6 +1,7 @@
 {
-  "_doc": "Source unique de la narration. `text` : phrase dite. `tts` : graphie phonétique envoyée au moteur de synthèse quand la prononciation doit être forcée. `subs` : découpage en sous-titres (leur concaténation redonne la phrase). `gap` : silence après la phrase, en secondes.",
+  "_doc": "Source unique de la narration. `intro` : durée de l’ouverture (logo et zoom cartographique) placée avant le film ; la voix, la musique et les sous-titres sont décalés d’autant. `text` : phrase dite. `tts` : graphie phonétique envoyée au moteur de synthèse quand la prononciation doit être forcée. `subs` : découpage en sous-titres (leur concaténation redonne la phrase). `gap` : silence après la phrase, en secondes.",
   "voice": { "engine": "kokoro", "name": "ff_siwis", "lang": "fr-fr", "speed": 1.0 },
+  "intro": 8.0,
   "lead": 3.2,
   "tail": 8.8,
   "sequences": [
@@ -20,9 +21,8 @@
       "subs": ["Isolement, incendies, sécheresses, tempêtes :", "ici, chaque aléa climatique fragilise les réseaux,", "et avec eux l’eau, les communications\net la continuité des services essentiels."] },
 
     { "id": "2a", "seq": 2, "gap": 0.45,
-      "text": "Smart Paese propose d’en faire un laboratoire territorial.",
-      "tts": "Smarte Paézé propose d’en faire un laboratoire territorial.",
-      "subs": ["Smart Paese propose d’en faire\nun laboratoire territorial."] },
+      "text": "Le village intelligent en fait un laboratoire territorial.",
+      "subs": ["Le village intelligent en fait\nun laboratoire territorial."] },
     { "id": "2b", "seq": 2, "gap": 1.4,
       "text": "Production, stockage, capteurs et réseaux y sont reliés au sein d’une même plateforme, pour concevoir, tester et évaluer, en conditions réelles, des solutions de résilience.",
       "subs": ["Production, stockage, capteurs et réseaux\ny sont reliés au sein d’une même plateforme,", "pour concevoir, tester et évaluer,", "en conditions réelles, des solutions de résilience."] },
@@ -70,9 +70,8 @@
       "subs": ["La gestion de l’eau, l’agriculture instrumentée", "et la recharge des véhicules\nrelèvent du même système."] },
 
     { "id": "6a", "seq": 6, "gap": 0.5,
-      "text": "Smart Paese se veut une plateforme de recherche reproductible.",
-      "tts": "Smarte Paézé se veut une plateforme de recherche reproductible.",
-      "subs": ["Smart Paese se veut une plateforme\nde recherche reproductible."] },
+      "text": "Ce village se veut une plateforme de recherche reproductible.",
+      "subs": ["Ce village se veut une plateforme\nde recherche reproductible."] },
     { "id": "6b", "seq": 6, "gap": 1.2,
       "text": "Collectivités, chercheurs et industriels pourront y expérimenter des technologies en conditions réelles, en mesurer les performances, et étudier leur déploiement dans d’autres territoires ruraux.",
       "subs": ["Collectivités, chercheurs et industriels\npourront y expérimenter des technologies", "en conditions réelles, en mesurer les performances,", "et étudier leur déploiement\ndans d’autres territoires ruraux."] }

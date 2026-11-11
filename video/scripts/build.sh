@@ -8,10 +8,13 @@ mkdir -p build out
 python3 scripts/voice.py                       # build/voice/*.wav, build/timeline.json
 node scripts/render.mjs --shots                # build/shots.json
 node scripts/render.mjs "$@"                   # build/picture.mp4
+INTRO=$(python3 -c "import json;print(json.load(open('narration.json'))['intro'])")
+node scripts/render.mjs --page intro.html --from 0 --to "$INTRO" --out build/intro.mp4   # logo du syndicat et zoom cartographique
+printf "file 'intro.mp4'\nfile 'picture.mp4'\n" > build/film.txt
 python3 scripts/audio.py                       # build/audio.wav
 python3 scripts/subs.py                        # out/*.srt, out/*.vtt, out/narration.md
 # build/picture.mp4 est un intermédiaire de haute qualité (≈ 25 Mbit/s) ; l'export final vise un fichier diffusable (< 100 Mo)
-ffmpeg -y -loglevel error -i build/picture.mp4 -i build/audio.wav -map 0:v -map 1:a \
+ffmpeg -y -loglevel error -f concat -safe 0 -i build/film.txt -i build/audio.wav -map 0:v -map 1:a \
   -c:v libx264 -preset slow -crf "${CRF:-25}" -maxrate 6M -bufsize 12M -pix_fmt yuv420p -g 50 -bf 2 \
   -colorspace bt709 -color_primaries bt709 -color_trc bt709 \
   -af "loudnorm=I=-16:TP=-1.5:LRA=11" -ar 48000 -c:a aac -b:a 192k -shortest -movflags +faststart \

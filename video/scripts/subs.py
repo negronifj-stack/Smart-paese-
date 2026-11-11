@@ -8,6 +8,10 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "out"; OUT.mkdir(exist_ok=True)
 TL = json.loads((ROOT / "build" / "timeline.json").read_text(encoding="utf-8"))
 NAR = json.loads((ROOT / "narration.json").read_text(encoding="utf-8"))
+INTRO = float(NAR.get("intro", 0))               # ouverture (logo, carte) placée avant le film : tout est décalé d'autant
+for c in TL["cues"]: c["start"] += INTRO; c["end"] += INTRO
+for q in TL["sequences"]: q["start"] += INTRO
+TL["duration"] += INTRO
 
 
 def tc(x, sep):
@@ -27,6 +31,7 @@ words = sum(len(s["text"].split()) for s in NAR["sentences"])
 md = ["# Smart Paese — texte de la narration", "",
       f"Film institutionnel et scientifique · durée {mmss(TL['duration'])} · {words} mots · voix off en français.", "",
       "Les repères de temps indiquent le début de chaque séquence dans le film.", ""]
+md += ["## Ouverture  ·  0:00", "", "*Sans voix : logo du Syndicat départemental d’énergie de Haute-Corse, puis zoom cartographique de la Méditerranée occidentale à la Haute-Corse et au village pilote.*", ""]
 for q in TL["sequences"]:
     md += [f"## {q['n']}. {q['title']}  ·  {mmss(q['start'])}", ""]
     md += [" ".join(s["text"] for s in NAR["sentences"] if s["seq"] == q["n"]), ""]
