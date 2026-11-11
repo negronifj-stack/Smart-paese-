@@ -87,7 +87,7 @@ X.terrain.material.color.set(0xc4c6ac); X.terrain.material.needsUpdate = true;
 /* ---------- torrent : un lit d'eau plat et sombre plutôt qu'un tube bleu ---------- */
 { const g = X.water.geometry, p = g.attributes.position, rs = 9, n = p.count / rs; for (let s_ = 0; s_ < n; s_++) { let cx = 0, cy = 0, cz = 0; for (let k = 0; k < rs; k++) { const i = s_ * rs + k; cx += p.getX(i); cy += p.getY(i); cz += p.getZ(i); } cx /= rs; cy /= rs; cz /= rs;
     for (let k = 0; k < rs; k++) { const i = s_ * rs + k; p.setXYZ(i, cx + (p.getX(i) - cx) * 1.7, cy - .35 + (p.getY(i) - cy) * .16, cz + (p.getZ(i) - cz) * 1.7); } } p.needsUpdate = true; g.computeVertexNormals();
-  X.water.material.color.set(0x41707f); X.water.material.roughness = .12; X.water.material.metalness = .2; X.water.material.opacity = .96; X.water.receiveShadow = true; }
+  X.water.material.color.set(0x2c5560); X.water.material.roughness = .3; X.water.material.metalness = .1; X.water.material.polygonOffset = true; X.water.material.polygonOffsetFactor = -2; X.water.material.polygonOffsetUnits = -8; X.water.material.opacity = .96; X.water.receiveShadow = true; }
 
 const sea = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000), new THREE.MeshBasicMaterial({ color: 0x3288a8 })); sea.rotation.x = -Math.PI / 2; sea.position.y = -8; X.scene.add(sea); X.sea = sea;
 X.camera.far = 7000; X.camera.updateProjectionMatrix();

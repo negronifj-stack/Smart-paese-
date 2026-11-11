@@ -97,6 +97,8 @@ function drawShot(sh, t) {
     X.flows.forEach(f => { let v = f.target; if (fl) v = fl[f.k] != null ? fl[f.k] : (fl._rest != null ? fl._rest * f.target : f.target); f.on = f.target = v; });
     applyLook(sh, lt, u);
     setCam(X.camera, X.controls, sh.cam(u, lt));
+    { /* tampon de profondeur peu précis en rendu logiciel : on éloigne le plan proche quand la caméra recule */
+      const dn = Math.max(.5, (X.camera.position.distanceTo(X.controls.target) - 60) / 22); if (X.camera.near !== dn) { X.camera.near = dn; X.camera.updateProjectionMatrix(); } }
   }
   window.VClock.step(T0 + t * 1000);
 }
