@@ -19,6 +19,7 @@ scene.start();
 [X.controls, studio.controls].forEach(c => { c.enabled = false; c.enableDamping = false; c.autoRotate = false; c.minDistance = 0; c.maxDistance = Infinity; c.maxPolarAngle = Math.PI; c.minPolarAngle = 0; });
 scene.noDraw = true; window.VClock.step(6000); window.VClock.step(12000); scene.noDraw = false;   // laisse finir le travelling d'ouverture de l'artéfact
 window.__x = X;
+window.Look(X, THREE);                // habillage du village : enduits, tuiles, maquis, mer
 const gl = scene.dom, snap = $("snap"), snapC = snap.getContext("2d");
 
 /* ---------- modèle : mêmes hypothèses que l'artéfact ---------- */
@@ -49,7 +50,7 @@ const EQUIP = [X.omb, X.borne, X.vig, X.pvField, X.wtank, X.ws, X.beam].concat(p
 function resetVillage(bare) {
   SCALED.forEach(k => { X[k].scale.setScalar(1); });
   EQUIP.forEach(o => { o.visible = !bare; }); X.mPV.opacity = 1;
-  X.setCut(null); X.terrain.material.wireframe = false; X.pines.visible = X.bush.visible = true;
+  X.setCut(null); X.terrain.material.wireframe = false; X.pines.visible = X.bush.visible = true; if (X.rocks) X.rocks.visible = true; if (X.sea) X.sea.visible = true;
 }
 /* Lumière et atmosphère du film, par-dessus les réglages de l'artéfact : brume de distance (perspective aérienne),
    soleil rasant plus chaud, clair de lune pour lire les scènes de nuit. « look » affine plan par plan. */
@@ -58,15 +59,15 @@ const cA = new THREE.Color(), cB = new THREE.Color();
 function applyLook(sh, lt, u) {
   const L = sh.look ? (typeof sh.look === "function" ? sh.look(lt, u) : sh.look) : {}, fog = X.scene.fog, S = X.sun;
   const day = clamp((S.intensity - .5) / 2.1, 0, 1), night = S.intensity === 0;
-  fog.near = L.fogNear != null ? L.fogNear : night ? 240 : 230; fog.far = L.fogFar != null ? L.fogFar : night ? 1300 : 1900;
+  fog.near = L.fogNear != null ? L.fogNear : night ? 300 : 420; fog.far = L.fogFar != null ? L.fogFar : night ? 1800 : 3400;
   if (night) {                                   // clair de lune : une directionnelle froide remplace le soleil couché
     S.intensity = L.moon != null ? L.moon : .34; S.color.set(0x9db4e6); S.position.set(-150, 260, 120);
-    X.hemi.intensity = .2; fog.color.set(0x0c1220); X.renderer.toneMappingExposure = .9;
+    X.hemi.intensity = .16; fog.color.set(0x0c1220); X.renderer.toneMappingExposure = .7;
   } else {
     const low = 1 - sstep(ramp(day, .05, .5));   // soleil bas : plus chaud, plus contrasté
     S.intensity *= 1 + .5 * low; cA.set(0xffc27a); S.color.lerp(cA, low * .6);
     X.renderer.toneMappingExposure *= .84 + .46 * low;
-    cA.setRGB(.58, .69, .84); cB.set(0xdcc0aa); fog.color.copy(cA).lerp(cB, low * .55);
+    cA.setRGB(.72, .84, .93); cB.set(0xdcc0aa); fog.color.copy(cA).lerp(cB, low * .55);
     if (L.fogNear == null) { fog.near += 90 * low; fog.far += 350 * low; }
   }
   if (L.fogColor) fog.color.set(L.fogColor);

@@ -31,8 +31,13 @@ function sceneForFilm() {
   let s = fs.readFileSync(path.join(ROOT, "artifact/js/scene.js"), "utf8");
   const rep = (a, b) => { if (!s.includes(a)) throw new Error("scene.js a changé, motif introuvable : " + a.slice(0, 50)); s = s.replace(a, b); };
   rep("function draw(sc, cam, strength) {", "function draw(sc, cam, strength) { if (api.noDraw) return;");
+  /* relief du film : côté ouvert de la vallée, le terrain descend jusqu'à la mer (le littoral se voit à l'horizon) */
+  rep("return Math.max(-6, (r < 60 ? slope * .4 : slope) + mount + n * Math.min(1, plateau / 40 + .15)); }",
+      "return Math.max(r < 300 ? -6 : -16, (r < 60 ? slope * .4 : slope) + mount + n * Math.min(1, plateau / 40 + .15) - Math.min(1, Math.max(0, (dir + .1) / .7)) * Math.max(0, r - 250) * .34); }");
+  rep("const h = height(x, z); if (h > 95) continue;", "const h = height(x, z); if (h > 95 || h < 2) continue;");
+  rep("const h = height(x, z); const sc = .5 + rnd(i, 23) * 1.2;", "const h = height(x, z); if (h < 2) continue; const sc = .5 + rnd(i, 23) * 1.2;");
   rep("apply(); flyTo(HOME.p.clone(), HOME.t.clone(), 3200);\nreturn api;",
-    "apply(); flyTo(HOME.p.clone(), HOME.t.clone(), 3200);\napi.x = { scene, camera, controls, renderer, flows, sun, hemi, amb, sky, stars, terrain, pines, bush, shells, setCut, apply, bloom, HS, N, height, at, cutG, htaMat, lamps, mWin, mWinRef, mPV, water, h2, hydG, turb, fireG, tops, pelton, battG, waves, scan, vig, extra, omb, borne, pvField, wtank, ws, poste, camp, antTip, sensors, fnodes, meters, lampLight, VIG, FIRE, H2P, CHP, TUR, COL, beam, antGlow, mRoad };\nreturn api;");
+    "apply(); flyTo(HOME.p.clone(), HOME.t.clone(), 3200);\napi.x = { scene, camera, controls, renderer, flows, sun, hemi, amb, sky, stars, terrain, pines, bush, shells, setCut, apply, bloom, HS, N, height, at, cutG, htaMat, lamps, mWin, mWinRef, mPV, water, h2, hydG, turb, fireG, tops, pelton, battG, waves, scan, vig, extra, omb, borne, pvField, wtank, ws, poste, camp, antTip, sensors, fnodes, meters, lampLight, VIG, FIRE, H2P, CHP, TUR, COL, beam, antGlow, mRoad, mWall, mStone, mRoof, mRoofB, mRoofL, mShut, mDoor, orchard, trunks, mast, clear, rnd, fbm, cap, bellM, tw };\nreturn api;");
   return s;
 }
 const MIME = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json", ".woff2": "font/woff2", ".jpg": "image/jpeg", ".png": "image/png", ".woff": "font/woff" };
@@ -57,7 +62,7 @@ async function open() {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: SS });
   page.on("pageerror", e => { console.error("[page]", e.message); process.exitCode = 1; });
   page.on("console", m => { if (m.type() === "error") console.error("[console]", m.text()); });
-  await page.goto("http://127.0.0.1:" + port + "/video/film/" + arg("page", "film.html"));
+  await page.goto("http://127.0.0.1:" + port + "/video/film/" + arg("page", "film.html"), { timeout: 300000 });
   await page.waitForFunction(() => window.Film && window.Film.ready, null, { timeout: 120000 });
   await page.evaluate(() => window.Film.ready);
   if (arg("no-subs")) await page.addStyleTag({ content: "#subs{display:none!important}" });
@@ -82,7 +87,9 @@ async function range(R, f0, f1, out, crf, label) {
 }
 
 const crf = +arg("crf", 17), CH = 5, TOTAL = Math.round(TL.duration * FPS), PARTS = path.join(BUILD, "parts");
-if (arg("shots")) {            // exporte le découpage (début et fin de chaque plan) pour la bande-son
+if (arg("eval")) {             // mise au point : évalue une expression dans la page et l'affiche
+  const R = await open(); console.log(JSON.stringify(await R.page.evaluate(arg("eval")))); await R.close();
+} else if (arg("shots")) {            // exporte le découpage (début et fin de chaque plan) pour la bande-son
   const R = await open(); fs.writeFileSync(path.join(BUILD, "shots.json"), JSON.stringify(await R.page.evaluate(() => window.Film.shots), null, 1)); await R.close(); console.log("build/shots.json");
 } else if (arg("bench")) {            // mesure le coût des passes de rendu (mise au point)
   const R = await open(), cdp = await R.page.context().newCDPSession(R.page), t = +arg("bench");

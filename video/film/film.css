@@ -15,8 +15,8 @@
 html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
 #frame{position:relative;width:1920px;height:1080px;overflow:hidden;background:#000;color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased}
 #stage{position:absolute;inset:0}
-#stage canvas{display:block;width:1920px;height:1080px;filter:contrast(1.12) saturate(1.16)}
-#snap{filter:contrast(1.12) saturate(1.16)}
+#stage canvas{display:block;width:1920px;height:1080px;filter:contrast(1.06) saturate(1.14)}
+#snap{filter:contrast(1.06) saturate(1.14)}
 #stage .hot,#stage button{display:none!important}
 #snap{position:absolute;inset:0;opacity:0;pointer-events:none}
 #grade{position:absolute;inset:0;pointer-events:none;
@@ -87,3 +87,13 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
 #title .rule{width:120px;height:3px;background:var(--grad);border-radius:2px;margin-bottom:38px}
 #title h1{font:800 92px/1 var(--sans);letter-spacing:.14em;margin-right:-.14em}
 #title p{font:500 30px/1.45 var(--sans);color:#e4e5e0;margin-top:34px;letter-spacing:.01em}
+
+/* effet maquette : flou progressif en haut et en bas de l'image, net au centre */
+#tilt{position:absolute;inset:0;pointer-events:none}
+#tilt i{position:absolute;left:0;right:0}
+#tilt i:nth-child(1){top:0;height:36%;backdrop-filter:blur(2.5px);-webkit-mask-image:linear-gradient(180deg,#000 35%,transparent)}
+#tilt i:nth-child(2){top:0;height:25%;backdrop-filter:blur(5px);-webkit-mask-image:linear-gradient(180deg,#000 35%,transparent)}
+#tilt i:nth-child(3){top:0;height:14%;backdrop-filter:blur(9px);-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent)}
+#tilt i:nth-child(4){bottom:0;height:32%;backdrop-filter:blur(2.5px);-webkit-mask-image:linear-gradient(0deg,#000 35%,transparent)}
+#tilt i:nth-child(5){bottom:0;height:21%;backdrop-filter:blur(5px);-webkit-mask-image:linear-gradient(0deg,#000 35%,transparent)}
+#tilt i:nth-child(6){bottom:0;height:11%;backdrop-filter:blur(9px);-webkit-mask-image:linear-gradient(0deg,#000 30%,transparent)}

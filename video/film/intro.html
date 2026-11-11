@@ -2,23 +2,39 @@
 <html lang="fr">
 <head><meta charset="utf-8"><title>Smart Paese — ouverture</title><link rel="stylesheet" href="film.css">
 <style>
-#map{position:absolute;inset:0;display:block}
+#stage canvas{filter:contrast(1.05) saturate(1.12)}
+#acc{position:absolute;inset:0;display:none;filter:contrast(1.05) saturate(1.12)}
 #logo{position:absolute;inset:0;background:#f7f7f5 url(assets/logo-sde2b.jpg) center/auto 1080px no-repeat}
+/* voile sombre à gauche et en bas, pour que les textes restent lisibles sur la mer claire */
+#shade{position:absolute;inset:0;opacity:0;background:linear-gradient(90deg,rgba(6,18,26,.72),rgba(6,18,26,.38) 32%,transparent 58%),linear-gradient(0deg,rgba(6,18,26,.55),transparent 34%)}
+/* flou maquette plus léger sur la carte : seuls les bords extrêmes */
+#tilt i:nth-child(1){height:22%}#tilt i:nth-child(2){height:12%}#tilt i:nth-child(3){display:none}#tilt i:nth-child(4){height:18%}#tilt i:nth-child(5){height:9%}#tilt i:nth-child(6){display:none}
 #super{bottom:120px}
 #super .k{font-size:18px}
 #super .h{font-size:40px;margin-top:10px;max-width:1100px}
-#tag{opacity:0}
 #note{bottom:64px}
+#legend{position:absolute;left:64px;top:56px;opacity:0;font:500 24px/1 var(--sans);color:var(--text)}
+#legend b{display:block;font:500 15px var(--mono);letter-spacing:.3em;text-transform:uppercase;color:var(--ambre);padding-bottom:16px;margin-bottom:8px;border-bottom:1px solid rgba(255,255,255,.3);width:470px}
+#legend div{display:flex;align-items:center;gap:16px;margin-top:20px;text-shadow:0 1px 10px rgba(0,0,0,.5)}
+#legend i{width:18px;height:18px;border-radius:50%;flex:none}
+#legend .led i{background:#9fd2fb;box-shadow:0 0 12px #6eb9f5}
+#legend .irve i{background:#F08363;border:2.5px solid #fff}
+#legend .sem i{background:#E9426C;border:2.5px solid #fff;border-radius:2px}
+#legend .vil i{background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.4)}
 </style></head>
 <body>
 <div id="frame">
-  <canvas id="map" width="1920" height="1080"></canvas>
-  <div id="grade"></div>
+  <div id="stage"></div>
+  <canvas id="acc" width="1920" height="1080"></canvas>
+  <div id="tilt"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div id="shade"></div>
+  <div id="legend"></div>
   <div id="super"><div class="k"></div><div class="h"></div></div>
   <div id="note"></div>
   <div id="logo"></div>
   <div id="black"></div>
 </div>
+<script src="../node_modules/three/build/three.min.js"></script>
 <script src="../../artifact-mandature/data/geo.js"></script>
 <script src="../../artifact-mandature/data/atlas-data.js"></script>
 <script src="intro.js"></script>
