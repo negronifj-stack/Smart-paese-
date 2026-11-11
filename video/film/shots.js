@@ -68,8 +68,11 @@ return [
 /* ================= 1 · LE TERRITOIRE ET SES VULNÉRABILITÉS ================= */
 { id: "1-aube", seq: 1, bare: true, at: 0, xf: 0,
   state: (lt, u) => day(ETE, lerp(7.45, 8.05, u)),
-  cam: orbit({ c: [12, 24, 22], r: [262, 228], az: [-176, -162], h: [124, 96], fov: [38, 38] }),
-  sup: { k: "Castagniccia · Haute-Corse", h: "Maquette numérique d’un village type", in: 1.6, out: 5.2 } },
+  // entrée dans le village : la caméra prolonge le zoom de la carte, d'une vue presque verticale à la vue aérienne
+  cam: u => { const e = 1 - Math.pow(1 - u, 2.4), az = lerp(-172, -162, e) * Math.PI / 180, el = lerp(78, 23, e) * Math.PI / 180, d = lerp(620, 247, e), c0 = [12, 24, 22];
+    return { p: [c0[0] + d * Math.cos(el) * Math.cos(az), c0[1] + d * Math.sin(el), c0[2] + d * Math.cos(el) * Math.sin(az)], t: c0, fov: 38 }; },
+  look: (lt, u) => ({ fogNear: lerp(520, 230, Math.min(1, u * 1.6)), fogFar: 2400 }),
+  sup: { k: "Castagniccia · Haute-Corse", h: "Maquette numérique d’un village type", in: 2.2, out: 5.2 } },
 { id: "1-ligne", bare: true, at: S("1a") + 2.0, xf: 0,
   state: (lt, u) => day(ETE, 9.2 + u * .2),
   cam: move({ p: [g(-236, -150, 40), g(-186, -108, 34)], t: [g(-110, -70, 10), g(-60, -34, 10)], fov: [40, 40] }),

@@ -22,6 +22,7 @@ const VIDEO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."), 
 const arg = (k, d) => { const i = process.argv.indexOf("--" + k); return i < 0 ? d : (process.argv[i + 1] && !process.argv[i + 1].startsWith("--") ? process.argv[i + 1] : true); };
 const FMT = arg("png") ? "png" : "jpeg"; // capture JPEG qualité 97 par défaut (bien plus rapide) ; --png pour une capture sans perte
 const SS = +arg("ss", 1);          // suréchantillonnage : rendu en 2880 × 1620, réduit en 1920 × 1080 par FFmpeg (anticrénelage)
+const NAR = JSON.parse(fs.readFileSync(path.join(VIDEO, "narration.json"), "utf8"));
 const TL = JSON.parse(fs.readFileSync(path.join(BUILD, "timeline.json"), "utf8")), FPS = TL.fps;
 
 /* La scène de l'artéfact est servie telle quelle, à trois ajouts près :
@@ -41,7 +42,7 @@ function serve() {
       const u = decodeURIComponent(req.url.split("?")[0]);
       try {
         if (u === "/gen/scene.film.js") { rsp.writeHead(200, { "content-type": MIME[".js"] }); return rsp.end(sceneForFilm()); }
-        if (u === "/gen/timeline.js") { rsp.writeHead(200, { "content-type": MIME[".js"] }); return rsp.end("window.TIMELINE = " + JSON.stringify(TL) + ";"); }
+        if (u === "/gen/timeline.js") { rsp.writeHead(200, { "content-type": MIME[".js"] }); return rsp.end("window.TIMELINE = " + JSON.stringify(TL) + "; window.TIMELINE.intro = " + JSON.stringify(NAR.intro || 0) + ";"); }
         const f = path.join(ROOT, path.normalize(u)); if (!f.startsWith(ROOT)) throw 0;
         const b = fs.readFileSync(f); rsp.writeHead(200, { "content-type": MIME[path.extname(f)] || "application/octet-stream" }); rsp.end(b);
       } catch (e) { rsp.writeHead(404); rsp.end("404"); }

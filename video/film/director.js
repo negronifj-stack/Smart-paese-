@@ -155,7 +155,8 @@ function overlays(sh, t, k) {
 
   /* noir d'ouverture, titre de fin, noir final */
   const fin = sstep(ramp(t, tEnd, tEnd + 1.4)), out = sstep(ramp(t, TL.duration - 1.3, TL.duration - .15));
-  el.black.style.opacity = Math.max(1 - sstep(ramp(t, .15, 1.9)), fin * .66, out).toFixed(3);
+  // pas de noir d'ouverture quand le film est précédé de l'ouverture cartographique : le montage enchaîne en fondu
+  el.black.style.opacity = Math.max(TL.intro ? 0 : 1 - sstep(ramp(t, .15, 1.9)), fin * .66, out).toFixed(3);
   el.title.style.opacity = (sstep(ramp(t, tEnd + .5, tEnd + 1.9)) * (1 - out)).toFixed(3);
   el.title.style.transform = "translateY(" + ((1 - sstep(ramp(t, tEnd + .5, tEnd + 2.2))) * 10).toFixed(1) + "px)";
 }

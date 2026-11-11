@@ -1,7 +1,8 @@
 {
-  "_doc": "Source unique de la narration. `intro` : durée de l’ouverture (logo et zoom cartographique) placée avant le film ; la voix, la musique et les sous-titres sont décalés d’autant. `text` : phrase dite. `tts` : graphie phonétique envoyée au moteur de synthèse quand la prononciation doit être forcée. `subs` : découpage en sous-titres (leur concaténation redonne la phrase). `gap` : silence après la phrase, en secondes.",
+  "_doc": "Source unique de la narration. `intro` : instant où le film commence, après l’ouverture (logo et carte) ; `intro_xf` : durée du fondu enchaîné entre la fin de l’ouverture et le film ; la voix, la musique et les sous-titres sont décalés d’autant. `text` : phrase dite. `tts` : graphie phonétique envoyée au moteur de synthèse quand la prononciation doit être forcée. `subs` : découpage en sous-titres (leur concaténation redonne la phrase). `gap` : silence après la phrase, en secondes.",
   "voice": { "engine": "kokoro", "name": "ff_siwis", "lang": "fr-fr", "speed": 1.0 },
-  "intro": 13.0,
+  "intro": 12.0,
+  "intro_xf": 1.2,
   "lead": 3.2,
   "tail": 8.8,
   "sequences": [

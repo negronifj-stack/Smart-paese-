@@ -12,7 +12,7 @@ SHOTS = json.loads((ROOT / "build" / "shots.json").read_text(encoding="utf-8"))
 INTRO = float(json.loads((ROOT / "narration.json").read_text(encoding="utf-8")).get("intro", 0))
 TL["duration"] += INTRO
 for s_ in SHOTS: s_["start"] += INTRO
-SHOTS.insert(0, {"id": "ouverture", "start": INTRO, "xf": 0})     # raccord au noir entre l'ouverture et le film
+SHOTS.insert(0, {"id": "ouverture", "start": INTRO, "xf": 1.2})   # fondu enchaîné entre l'ouverture et le film
 info = json.loads(subprocess.run(["ffprobe", "-v", "error", "-show_streams", "-show_format", "-of", "json", src], capture_output=True, text=True, check=True).stdout)
 v = next(s for s in info["streams"] if s["codec_type"] == "video"); a = next(s for s in info["streams"] if s["codec_type"] == "audio")
 size = int(info["format"]["size"]) / 1e6
