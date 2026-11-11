@@ -1,6 +1,6 @@
 # Smart Paese — film institutionnel et scientifique
 
-Film de présentation du dispositif Smart Paese, en Full HD (1920 × 1080, 25 images/s, 2 min 41),
+Film de présentation du dispositif Smart Paese, en Full HD (1920 × 1080, 25 images/s, 2 min 48),
 avec voix off française, ambiance sonore et sous-titres. Il est produit à partir de l'artéfact HTML
 Smart Paese : même scène 3D du village, mêmes ateliers 3D (pico-centrale, batterie, hydrogène, îlotage),
 même modèle énergétique horaire.
@@ -16,7 +16,7 @@ même modèle énergétique horaire.
 
 ## L'ouverture et les six séquences
 
-0. **Ouverture** (12 s, sans voix) — logo du Syndicat départemental d'énergie de Haute-Corse, puis carte de la Haute-Corse
+0. **Ouverture** (19 s, sans voix) — logo du Syndicat départemental d'énergie de Haute-Corse, puis carte de la Haute-Corse
    où s'allument les politiques du projet de mandature (éclairage public LED par tranches, stations de recharge, projets
    solaires de la SEM), dans un zoom continu qui plonge sur le village pilote, en Castagniccia, et s'enchaîne en fondu
    avec la vue 3D du village (la caméra 3D prolonge la plongée). Contours, sites et chiffres viennent de
