@@ -27,8 +27,14 @@ def synth_kokoro(texts, cfg):
     from kokoro_onnx import Kokoro
     k = Kokoro(str(MODELS / "kokoro-v1.0.onnx"), str(MODELS / "voices-v1.0.bin"))
     out = []
+    import re
     for t in texts:
-        s, sr = k.create(t, voice=cfg["name"], speed=cfg.get("speed", 1.0), lang=cfg.get("lang", "fr-fr"))
+        # Le texte est d'abord converti en phonèmes, puis corrigé : le phonémiseur ajoute des liaisons fautives
+        # (« capteurs‿et », « intelligent‿arbitre », « consommations‿alimentent ») qui trahissent la voix de synthèse.
+        ph = k.tokenizer.phonemize(t, cfg.get("lang", "fr-fr"))
+        ph = re.sub(r"(\S)z e ", r"\1 e ", ph)                 # jamais de liaison devant « et »
+        for a, b in cfg.get("phonemes", []): ph = ph.replace(a, b)
+        s, sr = k.create(ph, voice=cfg["name"], speed=cfg.get("speed", 1.0), lang=cfg.get("lang", "fr-fr"), is_phonemes=True)
         out.append(resample_poly(np.asarray(s, dtype=np.float64), SR, sr))
     return out
 

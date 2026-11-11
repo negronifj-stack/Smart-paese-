@@ -1,6 +1,15 @@
 {
-  "_doc": "Source unique de la narration. `intro` : instant où le film commence, après l’ouverture (logo et carte) ; `intro_xf` : durée du fondu enchaîné entre la fin de l’ouverture et le film ; la voix, la musique et les sous-titres sont décalés d’autant. `text` : phrase dite. `tts` : graphie phonétique envoyée au moteur de synthèse quand la prononciation doit être forcée. `subs` : découpage en sous-titres (leur concaténation redonne la phrase). `gap` : silence après la phrase, en secondes.",
-  "voice": { "engine": "kokoro", "name": "ff_siwis", "lang": "fr-fr", "speed": 1.0 },
+  "_doc": "Source unique de la narration. `intro` : instant où le film commence, après l’ouverture (logo et carte) ; `intro_xf` : durée du fondu enchaîné entre la fin de l’ouverture et le film ; la voix, la musique et les sous-titres sont décalés d’autant. `text` : phrase dite. `tts` : graphie envoyée au moteur de synthèse quand la prononciation doit être forcée. `voice.phonemes` : corrections phonétiques appliquées à toutes les phrases (liaisons fautives, noms propres). `subs` : découpage en sous-titres (leur concaténation redonne la phrase). `gap` : silence après la phrase, en secondes.",
+  "voice": { "engine": "kokoro", "name": "ff_siwis", "lang": "fr-fr", "speed": 1.0,
+    "phonemes": [
+      ["sɛʁvˈisz esɑ̃sjˈɛl", "sɛʁvˈis esɑ̃sjˈɛl"],
+      ["ʁezˈoz i", "ʁezˈo i"],
+      ["pɛltˈɔ̃", "pˈɛltən"],
+      ["ɛ̃tɛliʒˈɑ̃t aʁbˈitʁ", "ɛ̃tɛliʒˈɑ̃ aʁbˈitʁ"],
+      ["kaptˈœʁz ɑ̃viʁɔnmɑ̃tˈo", "kaptˈœʁ ɑ̃viʁɔnmɑ̃tˈo"],
+      ["kɔ̃sɔmasjˈɔ̃z alimˈɑ̃tt œ̃", "kɔ̃sɔmasjˈɔ̃ alimˈɑ̃t œ̃"],
+      ["tɛknoloʒˈiz ɑ̃", "tɛknoloʒˈi ɑ̃"]
+    ] },
   "intro": 19.2,
   "intro_xf": 1.2,
   "lead": 3.2,
@@ -22,12 +31,11 @@
       "subs": ["Isolement, incendies, sécheresses, tempêtes :", "ici, chaque aléa climatique fragilise les réseaux,", "et avec eux l’eau, les communications\net la continuité des services essentiels."] },
 
     { "id": "2a", "seq": 2, "gap": 0.45,
-      "text": "Le projet pilote porté par le SDE2B en fait un laboratoire territorial.",
-      "tts": "Le projet pilote porté par le S D E 2B en fait un laboratoire territorial.",
-      "subs": ["Le projet pilote porté par le SDE2B", "en fait un laboratoire territorial."] },
+      "text": "Le projet pilote porté par le Syndicat départemental d’énergie de Haute-Corse en fait un laboratoire territorial.",
+      "subs": ["Le projet pilote porté par le Syndicat départemental\nd’énergie de Haute-Corse", "en fait un laboratoire territorial."] },
     { "id": "2b", "seq": 2, "gap": 1.4,
-      "text": "Production, stockage, capteurs et réseaux y sont reliés pour concevoir, tester et évaluer, en conditions réelles, des solutions de résilience.",
-      "subs": ["Production, stockage, capteurs et réseaux\ny sont reliés", "pour concevoir, tester et évaluer,", "en conditions réelles, des solutions de résilience."] },
+      "text": "Production, stockage, capteurs et réseaux y sont reliés pour concevoir, tester et évaluer des solutions de résilience.",
+      "subs": ["Production, stockage, capteurs et réseaux\ny sont reliés", "pour concevoir, tester et évaluer\ndes solutions de résilience."] },
 
     { "id": "3a", "seq": 3, "gap": 0.5,
       "text": "Premier champ d’étude : l’énergie. Sur les toits publics et l’ombrière, le photovoltaïque produit au plus près des usages.",

@@ -1,6 +1,6 @@
 # Smart Paese — texte de la narration
 
-Film institutionnel et scientifique · durée 2:47 · 306 mots · voix off en français.
+Film institutionnel et scientifique · durée 2:47 · 307 mots · voix off en français.
 
 Les repères de temps indiquent le début de chaque séquence dans le film.
 
@@ -14,7 +14,7 @@ Ce village dépend d’une seule ligne électrique. Isolement, incendies, séche
 
 ## 2. Le concept Smart Paese  ·  0:38
 
-Le projet pilote porté par le SDE2B en fait un laboratoire territorial. Production, stockage, capteurs et réseaux y sont reliés pour concevoir, tester et évaluer, en conditions réelles, des solutions de résilience.
+Le projet pilote porté par le Syndicat départemental d’énergie de Haute-Corse en fait un laboratoire territorial. Production, stockage, capteurs et réseaux y sont reliés pour concevoir, tester et évaluer des solutions de résilience.
 
 ## 3. L’énergie  ·  0:53
 
