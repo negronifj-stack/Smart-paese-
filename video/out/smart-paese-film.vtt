@@ -1,144 +1,144 @@
 WEBVTT
 
-00:00:15.200 --> 00:00:17.865
+00:00:22.400 --> 00:00:25.065
 Ce village dépend d’une seule ligne électrique.
 
-00:00:19.760 --> 00:00:22.250
+00:00:26.960 --> 00:00:29.450
 Isolement, incendies, sécheresses, tempêtes :
 
-00:00:22.290 --> 00:00:25.280
+00:00:29.490 --> 00:00:32.480
 ici, chaque aléa climatique fragilise les réseaux,
 
-00:00:25.320 --> 00:00:29.887
+00:00:32.520 --> 00:00:37.087
 et avec eux l’eau, les communications
 et la continuité des services essentiels.
 
-00:00:31.037 --> 00:00:33.377
+00:00:38.237 --> 00:00:40.577
 Le projet pilote porté par le SDE2B
 
-00:00:33.417 --> 00:00:36.312
+00:00:40.617 --> 00:00:43.512
 en fait un laboratoire territorial.
 
-00:00:36.462 --> 00:00:39.855
+00:00:43.662 --> 00:00:47.055
 Production, stockage, capteurs et réseaux
 y sont reliés
 
-00:00:39.895 --> 00:00:41.814
+00:00:47.095 --> 00:00:49.014
 pour concevoir, tester et évaluer,
 
-00:00:41.854 --> 00:00:44.976
+00:00:49.054 --> 00:00:52.176
 en conditions réelles, des solutions de résilience.
 
-00:00:46.339 --> 00:00:48.277
+00:00:53.539 --> 00:00:55.477
 Premier champ d’étude : l’énergie.
 
-00:00:48.317 --> 00:00:50.317
+00:00:55.517 --> 00:00:57.517
 Sur les toits publics et l’ombrière,
 
-00:00:50.357 --> 00:00:53.387
+00:00:57.557 --> 00:01:00.587
 le photovoltaïque produit au plus près des usages.
 
-00:00:53.637 --> 00:00:56.819
+00:01:00.837 --> 00:01:04.019
 Sur le torrent, une conduite forcée
 met l’eau sous pression.
 
-00:00:56.859 --> 00:00:58.538
+00:01:04.059 --> 00:01:05.738
 Le jet entraîne une roue Pelton,
 
-00:00:58.578 --> 00:01:00.977
+00:01:05.778 --> 00:01:08.177
 dont l’alternateur produit jour et nuit.
 
-00:01:01.227 --> 00:01:04.319
+00:01:08.427 --> 00:01:11.519
 Une batterie communale stocke
 l’énergie de la mi-journée
 
-00:01:04.359 --> 00:01:06.623
+00:01:11.559 --> 00:01:13.823
 et conserve une réserve de sécurité.
 
-00:01:06.873 --> 00:01:12.131
+00:01:14.073 --> 00:01:19.331
 L’hydrogène est étudié comme une piste
 de stockage complémentaire, de plus longue durée.
 
-00:01:12.381 --> 00:01:14.892
+00:01:19.581 --> 00:01:22.092
 Un pilotage intelligent arbitre en continu
 
-00:01:14.932 --> 00:01:18.091
+00:01:22.132 --> 00:01:25.291
 entre production, stockage et consommation.
 
-00:01:19.241 --> 00:01:21.867
+00:01:26.441 --> 00:01:29.067
 Que se passe-t-il si la ligne est interrompue ?
 
-00:01:22.317 --> 00:01:26.365
+00:01:29.517 --> 00:01:33.565
 En fonctionnement normal,
 le réseau complète la production locale.
 
-00:01:26.615 --> 00:01:29.052
+00:01:33.815 --> 00:01:36.252
 En mode dégradé, le village s’isolerait.
 
-00:01:29.092 --> 00:01:31.030
+00:01:36.292 --> 00:01:38.230
 La batterie reformerait le réseau ;
 
-00:01:31.070 --> 00:01:33.810
+00:01:38.270 --> 00:01:41.010
 le solaire et le torrent viendraient la recharger.
 
-00:01:34.060 --> 00:01:37.705
+00:01:41.260 --> 00:01:44.905
 L’énergie serait alors réservée
 aux équipements prioritaires :
 
-00:01:37.745 --> 00:01:39.631
+00:01:44.945 --> 00:01:46.831
 mairie-refuge, communications,
 
-00:01:39.671 --> 00:01:42.665
+00:01:46.871 --> 00:01:49.865
 alimentation en eau et éclairage de sécurité.
 
-00:01:42.915 --> 00:01:46.410
+00:01:50.115 --> 00:01:53.610
 Dans le modèle, l’objectif est de tenir
 soixante-douze heures :
 
-00:01:46.450 --> 00:01:49.617
+00:01:53.650 --> 00:01:56.817
 une hypothèse que l’expérimentation
 devra confirmer.
 
-00:01:50.767 --> 00:01:52.788
+00:01:57.967 --> 00:01:59.988
 La plateforme est aussi numérique.
 
-00:01:52.828 --> 00:01:55.847
+00:02:00.028 --> 00:02:03.047
 Capteurs environnementaux, vigie incendie,
 
-00:01:55.887 --> 00:01:57.878
+00:02:03.087 --> 00:02:05.078
 réseau radio secouru et suivi des consommations
 
-00:01:57.918 --> 00:02:01.017
+00:02:05.118 --> 00:02:08.217
 alimentent un jumeau numérique du village.
 
-00:02:01.267 --> 00:02:05.006
+00:02:08.467 --> 00:02:12.206
 À partir de ces données,
 l’intelligence artificielle doit aider
 
-00:02:05.046 --> 00:02:07.719
+00:02:12.246 --> 00:02:14.919
 à anticiper les risques, à optimiser les ressources
 
-00:02:07.759 --> 00:02:09.463
+00:02:14.959 --> 00:02:16.663
 et à éclairer la décision.
 
-00:02:09.713 --> 00:02:12.256
+00:02:16.913 --> 00:02:19.456
 La gestion de l’eau, l’agriculture instrumentée
 
-00:02:12.296 --> 00:02:15.673
+00:02:19.496 --> 00:02:22.873
 et la recharge des véhicules
 relèvent du même système.
 
-00:02:16.823 --> 00:02:20.988
+00:02:24.023 --> 00:02:28.188
 Ce projet pilote se veut une plateforme
 de recherche reproductible.
 
-00:02:21.028 --> 00:02:25.233
+00:02:28.228 --> 00:02:32.433
 Collectivités, chercheurs et industriels
 pourront y expérimenter des technologies
 
-00:02:25.273 --> 00:02:27.928
+00:02:32.473 --> 00:02:35.128
 en conditions réelles, en mesurer les performances,
 
-00:02:27.968 --> 00:02:31.997
+00:02:35.168 --> 00:02:39.197
 et étudier leur déploiement
 dans d’autres territoires ruraux.
