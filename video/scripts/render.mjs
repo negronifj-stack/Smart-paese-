@@ -95,6 +95,7 @@ if (arg("eval")) {             // mise au point : évalue une expression dans la
   const R = await open(), cdp = await R.page.context().newCDPSession(R.page), t = +arg("bench");
   const run = async (name, js) => { await R.page.evaluate(js); let a = Date.now(); for (let i = 0; i < 4; i++) { await R.page.evaluate(t => window.Film.renderAt(t), t + i / 30); await cdp.send("Page.captureScreenshot", { format: "jpeg", quality: 97, optimizeForSpeed: true }); } console.log(name, ((Date.now() - a) / 4).toFixed(0) + " ms"); };
   await run("référence", "0"); await run("référence", "0");
+  if (arg("js")) { for (const j of String(arg("js")).split("||")) await run(j.slice(0, 60), j); await R.close(); process.exit(0); }
   await run("sans filtre CSS", "document.querySelector('#stage canvas').style.filter='none'");
   await run("sans backdrop", "document.querySelectorAll('*').forEach(e=>{e.style.backdropFilter='none'})");
   await run("sans grade", "document.getElementById('grade').style.display='none'");

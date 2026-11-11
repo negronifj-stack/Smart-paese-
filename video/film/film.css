@@ -91,9 +91,9 @@ html,body{width:1920px;height:1080px;overflow:hidden;background:#000}
 /* effet maquette : flou progressif en haut et en bas de l'image, net au centre */
 #tilt{position:absolute;inset:0;pointer-events:none}
 #tilt i{position:absolute;left:0;right:0}
-#tilt i:nth-child(1){top:0;height:36%;backdrop-filter:blur(2.5px);-webkit-mask-image:linear-gradient(180deg,#000 35%,transparent)}
-#tilt i:nth-child(2){top:0;height:25%;backdrop-filter:blur(5px);-webkit-mask-image:linear-gradient(180deg,#000 35%,transparent)}
-#tilt i:nth-child(3){top:0;height:14%;backdrop-filter:blur(9px);-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent)}
-#tilt i:nth-child(4){bottom:0;height:32%;backdrop-filter:blur(2.5px);-webkit-mask-image:linear-gradient(0deg,#000 35%,transparent)}
-#tilt i:nth-child(5){bottom:0;height:21%;backdrop-filter:blur(5px);-webkit-mask-image:linear-gradient(0deg,#000 35%,transparent)}
-#tilt i:nth-child(6){bottom:0;height:11%;backdrop-filter:blur(9px);-webkit-mask-image:linear-gradient(0deg,#000 30%,transparent)}
+#tilt i:nth-child(1){top:0;height:34%;backdrop-filter:blur(3px);-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent)}
+#tilt i:nth-child(2){top:0;height:19%;backdrop-filter:blur(8px);-webkit-mask-image:linear-gradient(180deg,#000 30%,transparent)}
+#tilt i:nth-child(3){display:none}
+#tilt i:nth-child(4){bottom:0;height:30%;backdrop-filter:blur(3px);-webkit-mask-image:linear-gradient(0deg,#000 30%,transparent)}
+#tilt i:nth-child(5){bottom:0;height:16%;backdrop-filter:blur(8px);-webkit-mask-image:linear-gradient(0deg,#000 30%,transparent)}
+#tilt i:nth-child(6){display:none}

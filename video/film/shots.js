@@ -207,7 +207,7 @@ return [
              { p: g(40, 18, 11), label: "Suivi des consommations", sub: "comptage par bâtiment", in: 1.5, dx: 70, dy: -78 }] },
 { id: "5-jumeau", at: cue("5a", 3) - .5, xf: 1.3,
   state: (lt, u) => Object.assign(day(ETE, 21.6), { soc: .72 }),
-  setup(lt) { X.terrain.material.wireframe = true; X.pines.visible = false; X.bush.visible = false; },
+  setup(lt) { X.terrain.material.wireframe = true; X.pines.visible = false; X.bush.visible = false; X.sea.visible = false; X.rocks.visible = false; },
   flows: () => ({ dat1: 1, dat2: 1, dat3: 1, dat4: 1, pv1: .5, pv4: .5, hyd2: .7, bat: .7, bat3: .5, agri: .5, _rest: 0 }),
   look: { moon: .2, expo: 1.25, fogNear: 300, fogFar: 1600 }, waves: true,
   cam: orbit({ c: [10, 6, 14], r: [236, 206], az: [-150, -112], h: [128, 110], fov: [38, 38] }),

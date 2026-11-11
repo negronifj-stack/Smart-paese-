@@ -4,8 +4,10 @@
 window.Look = function (X, THREE) {
 "use strict";
 const rnd = X.rnd, V = (x, y, z) => new THREE.Vector3(x, y, z);
-function tex(w, fn, rep) { const c = document.createElement("canvas"); c.width = c.height = w; fn(c.getContext("2d"), w); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(rep, rep); t.encoding = THREE.sRGBEncoding; t.anisotropy = 8; return t; }
+function tex(w, fn, rep) { const c = document.createElement("canvas"); c.width = c.height = w; fn(c.getContext("2d"), w); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(rep, rep); t.encoding = THREE.sRGBEncoding; t.anisotropy = 2; return t; }
 
+const strip = g => { Object.keys(g.attributes).forEach(k => { if (["position", "normal", "color"].indexOf(k) < 0) g.deleteAttribute(k); }); return g; };
+const merge = a => THREE.BufferGeometryUtils.mergeBufferGeometries(a.map(strip));
 /* ---------- façades enduites, volets, tuiles ---------- */
 const plaster = tex(256, (g, w) => { g.fillStyle = "#f4f1ea"; g.fillRect(0, 0, w, w); for (let i = 0; i < 2600; i++) { const v = 225 + Math.random() * 30; g.fillStyle = `rgba(${v},${v - 3},${v - 10},.25)`; g.fillRect(Math.random() * w, Math.random() * w, 2 + Math.random() * 14, 1 + Math.random() * 5); }
   g.fillStyle = "rgba(120,100,80,.10)"; g.fillRect(0, w - 26, w, 26); }, 1);
@@ -20,12 +22,19 @@ X.scene.children.forEach(g => { if (!g.isGroup || !g.userData.body) return; cons
   g.traverse(o => { if (!o.isMesh) return; const m = o.material;
     if (m === X.mShut) o.material = shut;
     else if (m === X.mWall || m === X.mStone || (X.shells.hydro && X.shells.hydro.indexOf(o) >= 0 && o === g.userData.body)) { const p = o.geometry.parameters; o.material = p && p.height === 1.2 ? base : (o === g.userData.body && X.shells.hydro && X.shells.hydro.indexOf(o) >= 0 ? Object.assign(wall.clone(), { transparent: true }) : wall); } }); });
-/* fenêtres et volets sur les pignons (l'artéfact n'en pose que sur deux façades) */
-X.scene.children.forEach(g => { if (!g.isGroup || !g.userData.body || g === X.turb) return; const p = g.userData.body.geometry.parameters; if (!p || p.width < 7.5) return;
-  let wm = X.mWin, sm = null; g.traverse(o => { if (o.isMesh && o.geometry.parameters && o.geometry.parameters.width === 1.4 && o.geometry.parameters.height === 2) wm = o.material; if (o.isMesh && o.geometry.parameters && o.geometry.parameters.width === .08) sm = o.material; });
-  for (let f = 0; 2.6 + f * 3.6 + 1.2 < p.height; f++) [-1, 1].forEach(sx => [-1, 1].forEach(sz => { if (f === 0 && sz > 0 && p.width < 9) return;
-    const w = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 1.9), wm); w.position.set(sx * p.width * .27, 2.6 + f * 3.6, sz * (p.depth / 2 + .03)); if (sz < 0) w.rotation.y = Math.PI; g.add(w);
-    if (sm) [-1, 1].forEach(sd => { const sh = new THREE.Mesh(new THREE.BoxGeometry(.55, 1.9, .08), sm); sh.position.set(w.position.x + sd * .98, w.position.y, sz * (p.depth / 2 + .06)); sh.castShadow = true; g.add(sh); }); })); });
+/* fenêtres et volets sur les pignons (l'artéfact n'en pose que sur deux façades).
+   Toutes ces pièces sont fusionnées en trois maillages : des centaines d'objets séparés ralentiraient le rendu. */
+{ const gw = [], gr = [], gs = [], m4 = new THREE.Matrix4(), tmp = new THREE.Object3D(), cS = new THREE.Color();
+  const put = (list, geo, parent, x, y, z, ry, color) => { tmp.position.set(x, y, z); tmp.rotation.set(0, ry, 0); tmp.updateMatrix(); m4.multiplyMatrices(parent.matrixWorld, tmp.matrix); const g = geo.clone().applyMatrix4(m4).toNonIndexed();
+    if (color) { const n = g.attributes.position.count, c = new Float32Array(n * 3); for (let i = 0; i < n; i++) { c[i * 3] = color.r; c[i * 3 + 1] = color.g; c[i * 3 + 2] = color.b; } g.setAttribute("color", new THREE.BufferAttribute(c, 3)); } list.push(g); };
+  const gWin = new THREE.PlaneGeometry(1.3, 1.9), gSh = new THREE.BoxGeometry(.55, 1.9, .08); X.scene.updateMatrixWorld(true);
+  X.scene.children.forEach(g => { if (!g.isGroup || !g.userData.body || g === X.turb) return; const p = g.userData.body.geometry.parameters; if (!p || p.width < 7.5) return;
+    let ref = false, sm = null; g.traverse(o => { if (o.isMesh && o.material === X.mWinRef) ref = true; if (o.isMesh && o.geometry.parameters && o.geometry.parameters.width === .08) sm = o.material; });
+    for (let f = 0; 2.6 + f * 3.6 + 1.2 < p.height; f++) [-1, 1].forEach(sx => [-1, 1].forEach(sz => { if (f === 0 && sz > 0 && p.width < 9) return; const x = sx * p.width * .27, y = 2.6 + f * 3.6;
+      put(ref ? gr : gw, gWin, g, x, y, sz * (p.depth / 2 + .03), sz < 0 ? Math.PI : 0);
+      if (sm) [-1, 1].forEach(sd => put(gs, gSh, g, x + sd * .98, y, sz * (p.depth / 2 + .06), 0, cS.copy(sm.color))); })); });
+  const mesh = (list, mat, shadow) => { if (!list.length) return; const m = new THREE.Mesh(merge(list), mat); m.castShadow = !!shadow; m.receiveShadow = true; X.scene.add(m); };
+  mesh(gw, X.mWin); mesh(gr, X.mWinRef); mesh(gs, new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: .7 }), true); }
 /* campanile : fût blanc, corniche, lanternon à coupole */
 const white = new THREE.MeshStandardMaterial({ color: 0xfbf9f3, map: plaster, roughness: .9 });
 X.tw.material = white; X.cap.visible = false; X.bellM.material = new THREE.MeshStandardMaterial({ color: 0x3a3d40, roughness: .8 }); X.bellM.scale.set(.72, 1, 1.02);
@@ -43,13 +52,11 @@ function blob(r, det, amp, seed, cy, dark) { const g = new THREE.IcosahedronGeom
     const s = dark + (1 - dark) * Math.min(1, Math.max(0, (y / r + 1) / 1.7)); col[i * 3] = s; col[i * 3 + 1] = s; col[i * 3 + 2] = s * .95; }
   g.setAttribute("color", new THREE.BufferAttribute(col, 3)); g.computeVertexNormals(); return g.index ? g.toNonIndexed() : g; }
 function trunk(h, r) { const g = new THREE.CylinderGeometry(r * .7, r, h, 6).toNonIndexed(); g.translate(0, h / 2, 0); const n = g.attributes.position.count, col = new Float32Array(n * 3); for (let i = 0; i < n; i++) { col[i * 3] = .55; col[i * 3 + 1] = .38; col[i * 3 + 2] = .26; } g.setAttribute("color", new THREE.BufferAttribute(col, 3)); return g; }
-const strip = g => { Object.keys(g.attributes).forEach(k => { if (["position", "normal", "color"].indexOf(k) < 0) g.deleteAttribute(k); }); return g; };
-const merge = a => THREE.BufferGeometryUtils.mergeBufferGeometries(a.map(strip));
-const b1 = blob(3.1, 1, .34, 1, 6.2, .42), b2g = blob(2.3, 1, .34, 2, 5.0, .42), b3 = blob(2.1, 1, .34, 3, 5.3, .42); b2g.translate(1.9, 0, .8); b3.translate(-1.5, .4, -1.3);
-X.pines.geometry = merge([trunk(4.4, .5), b1, b2g, b3]);
+const b1 = blob(3.1, 1, .34, 1, 6.2, .42), b2g = blob(2.3, 0, .3, 2, 5.0, .42), b3 = blob(2.1, 1, .34, 3, 5.3, .42); b2g.translate(1.9, 0, .8); b3.translate(-1.5, .4, -1.3);
+X.pines.geometry = merge([trunk(4.4, .5), b1, b2g]);       // deux masses de feuillage : assez pour la silhouette, deux fois moins de triangles
 X.pines.material = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: .95 });
 const tint = new THREE.Color(); for (let i = 0; i < X.pines.count; i++) { tint.setHSL(.23 + rnd(i, 6) * .07, .34 + rnd(i, 7) * .16, .13 + rnd(i, 8) * .08); X.pines.setColorAt(i, tint); } X.pines.instanceColor.needsUpdate = true;
-X.bush.geometry = strip(blob(1.8, 1, .4, 5, 0, .5)); X.bush.material = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 1 });
+X.bush.geometry = strip(blob(1.8, 1, .4, 5, 0, .5)); X.bush.castShadow = false; X.bush.material = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 1 });
 for (let i = 0; i < X.bush.count; i++) { tint.setHSL(.2 + rnd(i, 25) * .09, .32 + rnd(i, 26) * .16, .17 + rnd(i, 27) * .1); X.bush.setColorAt(i, tint); } X.bush.instanceColor.needsUpdate = true;
 X.orchard.geometry = strip(blob(2.5, 1, .3, 9, 0, .5)); X.orchard.material = new THREE.MeshStandardMaterial({ color: 0x7c8a58, vertexColors: true, roughness: 1 });
 /* rochers clairs dans le maquis */
@@ -62,6 +69,6 @@ rocks.count = ri; rocks.castShadow = rocks.receiveShadow = true; X.scene.add(roc
 X.terrain.material.map = tex(512, (g, w) => { g.fillStyle = "#c9cdb6"; g.fillRect(0, 0, w, w); for (let i = 0; i < 5200; i++) { const v = 150 + Math.random() * 90, r = 2 + Math.random() * 13; g.fillStyle = `rgba(${v * .86},${v},${v * .7},.28)`; g.beginPath(); g.arc(Math.random() * w, Math.random() * w, r, 0, 6.3); g.fill(); }
   for (let i = 0; i < 9000; i++) { const v = 120 + Math.random() * 120; g.fillStyle = `rgba(${v},${v},${v * .8},.35)`; g.fillRect(Math.random() * w, Math.random() * w, 1.5, 1.5); } }, 46);
 X.terrain.material.color.set(0xb9bfa2); X.terrain.material.needsUpdate = true;
-const sea = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000), new THREE.MeshStandardMaterial({ color: 0x2f9fc0, roughness: .22, metalness: .15 })); sea.rotation.x = -Math.PI / 2; sea.position.y = -8; X.scene.add(sea); X.sea = sea;
+const sea = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000), new THREE.MeshBasicMaterial({ color: 0x3d9fbe })); sea.rotation.x = -Math.PI / 2; sea.position.y = -8; X.scene.add(sea); X.sea = sea;
 X.camera.far = 7000; X.camera.updateProjectionMatrix();
 };
