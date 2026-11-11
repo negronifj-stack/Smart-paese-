@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Smart Paese — film</title>
+<link rel="stylesheet" href="film.css">
+</head>
+<body>
+<div id="frame">
+  <div id="stage"></div>
+  <canvas id="snap" width="1920" height="1080"></canvas>
+  <div id="grade"></div>
+  <div id="ov">
+    <div id="chapter"><span class="n"></span><span class="t"></span><i></i></div>
+    <div id="tag"></div>
+    <div id="callouts"></div>
+    <div id="panel"></div>
+    <div id="badge"><i></i><span></span></div>
+    <div id="note"></div>
+    <div id="super"><div class="k"></div><div class="h"></div></div>
+  </div>
+  <div id="black"></div>
+  <div id="title"><div class="rule"></div><h1>SMART PAESE</h1><p>Programme de recherche et d’expérimentation<br>pour la résilience des territoires ruraux.</p></div>
+  <div id="subs"><span></span></div>
+</div>
+
+<!-- Horloge virtuelle : doit précéder tout le reste -->
+<script src="clock.js"></script>
+<script src="../node_modules/three/build/three.min.js"></script>
+<script src="../node_modules/three/examples/js/controls/OrbitControls.js"></script>
+<script src="../node_modules/three/examples/js/objects/Sky.js"></script>
+<script src="../node_modules/three/examples/js/environments/RoomEnvironment.js"></script>
+<script src="../node_modules/three/examples/js/shaders/CopyShader.js"></script>
+<script src="../node_modules/three/examples/js/shaders/LuminosityHighPassShader.js"></script>
+<script src="../node_modules/three/examples/js/shaders/GammaCorrectionShader.js"></script>
+<script src="../node_modules/three/examples/js/shaders/FXAAShader.js"></script>
+<script src="../node_modules/three/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="../node_modules/three/examples/js/postprocessing/RenderPass.js"></script>
+<script src="../node_modules/three/examples/js/postprocessing/ShaderPass.js"></script>
+<script src="../node_modules/three/examples/js/postprocessing/UnrealBloomPass.js"></script>
+<!-- Sources de l'artéfact : modèle, scène du village (instrumentée à la volée par le serveur de rendu), ateliers 3D -->
+<script src="../../artifact/js/model.js"></script>
+<script src="/gen/scene.film.js"></script>
+<script src="../../artifact/js/studio.js"></script>
+<script src="/gen/timeline.js"></script>
+<script src="shots.js"></script>
+<script src="director.js"></script>
+</body>
+</html>
