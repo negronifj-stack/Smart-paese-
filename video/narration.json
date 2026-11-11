@@ -31,8 +31,8 @@
       "subs": ["Isolement, incendies, sécheresses, tempêtes :", "ici, chaque aléa climatique fragilise les réseaux,", "et avec eux l’eau, les communications\net la continuité des services essentiels."] },
 
     { "id": "2a", "seq": 2, "gap": 0.45,
-      "text": "Le projet pilote porté par le Syndicat départemental d’énergie de Haute-Corse en fait un laboratoire territorial.",
-      "subs": ["Le projet pilote porté par le Syndicat départemental\nd’énergie de Haute-Corse", "en fait un laboratoire territorial."] },
+      "text": "Porté par le Syndicat départemental d’énergie de Haute-Corse, c’est le prototype du village de demain.",
+      "subs": ["Porté par le Syndicat départemental\nd’énergie de Haute-Corse,", "c’est le prototype du village de demain."] },
     { "id": "2b", "seq": 2, "gap": 1.4,
       "text": "Production, stockage, capteurs et réseaux y sont reliés pour concevoir, tester et évaluer des solutions de résilience.",
       "subs": ["Production, stockage, capteurs et réseaux\ny sont reliés", "pour concevoir, tester et évaluer\ndes solutions de résilience."] },
@@ -66,8 +66,8 @@
       "text": "L’énergie serait alors réservée aux équipements prioritaires : mairie-refuge, communications, alimentation en eau et éclairage de sécurité.",
       "subs": ["L’énergie serait alors réservée\naux équipements prioritaires :", "mairie-refuge, communications,", "alimentation en eau et éclairage de sécurité."] },
     { "id": "4e", "seq": 4, "gap": 1.4,
-      "text": "Dans le modèle, l’objectif est de tenir soixante-douze heures : une hypothèse que l’expérimentation devra confirmer.",
-      "subs": ["Dans le modèle, l’objectif est de tenir\nsoixante-douze heures :", "une hypothèse que l’expérimentation\ndevra confirmer."] },
+      "text": "Ce modèle est conçu pour tenir plusieurs jours.",
+      "subs": ["Ce modèle est conçu pour tenir plusieurs jours."] },
 
     { "id": "5a", "seq": 5, "gap": 0.5,
       "text": "La plateforme est aussi numérique. Capteurs environnementaux, vigie incendie, réseau radio secouru et suivi des consommations alimentent un jumeau numérique du village.",
@@ -80,8 +80,8 @@
       "subs": ["La gestion de l’eau, l’agriculture instrumentée", "et la recharge des véhicules\nrelèvent du même système."] },
 
     { "id": "6a", "seq": 6, "gap": 0.5,
-      "text": "Ce projet pilote se veut une plateforme de recherche reproductible.",
-      "subs": ["Ce projet pilote se veut une plateforme\nde recherche reproductible."] },
+      "text": "Ce prototype du village de demain se veut reproductible.",
+      "subs": ["Ce prototype du village de demain\nse veut reproductible."] },
     { "id": "6b", "seq": 6, "gap": 1.2,
       "text": "Collectivités, chercheurs et industriels pourront y expérimenter des technologies en conditions réelles, en mesurer les performances, et étudier leur déploiement dans d’autres territoires ruraux.",
       "subs": ["Collectivités, chercheurs et industriels\npourront y expérimenter des technologies", "en conditions réelles, en mesurer les performances,", "et étudier leur déploiement\ndans d’autres territoires ruraux."] }

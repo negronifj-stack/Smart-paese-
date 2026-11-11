@@ -54,7 +54,7 @@ function resetVillage(bare) {
 }
 /* Lumière et atmosphère du film, par-dessus les réglages de l'artéfact : brume de distance (perspective aérienne),
    soleil rasant plus chaud, clair de lune pour lire les scènes de nuit. « look » affine plan par plan. */
-X.water.material.color.set(0x7fb2cc); X.water.material.emissiveIntensity = .1;
+X.water.material.emissiveIntensity = .05;
 const cA = new THREE.Color(), cB = new THREE.Color();
 function applyLook(sh, lt, u) {
   const L = sh.look ? (typeof sh.look === "function" ? sh.look(lt, u) : sh.look) : {}, fog = X.scene.fog, S = X.sun;
@@ -66,7 +66,7 @@ function applyLook(sh, lt, u) {
   } else {
     const low = 1 - sstep(ramp(day, .05, .5));   // soleil bas : plus chaud, plus contrasté
     S.intensity *= 1 + .5 * low; cA.set(0xffc27a); S.color.lerp(cA, low * .6);
-    X.renderer.toneMappingExposure *= .84 + .46 * low;
+    X.renderer.toneMappingExposure *= .96 + .4 * low;
     cA.setRGB(.72, .84, .93); cB.set(0xdcc0aa); fog.color.copy(cA).lerp(cB, low * .55);
     if (L.fogNear == null) { fog.near += 90 * low; fog.far += 350 * low; }
   }
@@ -75,7 +75,7 @@ function applyLook(sh, lt, u) {
   if (L.hemiI != null) X.hemi.intensity = L.hemiI;
   if (L.expo) X.renderer.toneMappingExposure *= L.expo;
   X.scan.visible = !!sh.scan; X.waves.forEach(w => { w.visible = !!sh.waves; });
-  X.water.material.emissiveIntensity = night ? .03 : .1;
+  X.water.material.emissiveIntensity = night ? .02 : .05;
 }
 const v3 = new THREE.Vector3();
 function setCam(cam, ctl, c) { cam.position.set(c.p[0], c.p[1], c.p[2]); ctl.target.set(c.t[0], c.t[1], c.t[2]); const f = c.fov || 38; if (cam.fov !== f) { cam.fov = f; cam.updateProjectionMatrix(); } }

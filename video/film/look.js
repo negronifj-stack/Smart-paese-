@@ -6,7 +6,8 @@ window.Look = function (X, THREE) {
 const rnd = X.rnd, V = (x, y, z) => new THREE.Vector3(x, y, z);
 function tex(w, fn, rep) { const c = document.createElement("canvas"); c.width = c.height = w; fn(c.getContext("2d"), w); const t = new THREE.CanvasTexture(c); t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(rep, rep); t.encoding = THREE.sRGBEncoding; t.anisotropy = 2; return t; }
 
-const strip = g => { Object.keys(g.attributes).forEach(k => { if (["position", "normal", "color"].indexOf(k) < 0) g.deleteAttribute(k); }); return g; };
+const strip = g => { Object.keys(g.attributes).forEach(k => { if (["position", "normal", "color", "uv"].indexOf(k) < 0) g.deleteAttribute(k); });
+  if (!g.attributes.uv) g.setAttribute("uv", new THREE.BufferAttribute(new Float32Array(g.attributes.position.count * 2), 2)); return g; };
 const merge = a => THREE.BufferGeometryUtils.mergeBufferGeometries(a.map(strip));
 /* ---------- façades enduites, volets, tuiles ---------- */
 const plaster = tex(256, (g, w) => { g.fillStyle = "#f4f1ea"; g.fillRect(0, 0, w, w); for (let i = 0; i < 2600; i++) { const v = 225 + Math.random() * 30; g.fillStyle = `rgba(${v},${v - 3},${v - 10},.25)`; g.fillRect(Math.random() * w, Math.random() * w, 2 + Math.random() * 14, 1 + Math.random() * 5); }
@@ -35,6 +36,7 @@ X.scene.children.forEach(g => { if (!g.isGroup || !g.userData.body) return; cons
       if (sm) [-1, 1].forEach(sd => put(gs, gSh, g, x + sd * .98, y, sz * (p.depth / 2 + .06), 0, cS.copy(sm.color))); })); });
   const mesh = (list, mat, shadow) => { if (!list.length) return; const m = new THREE.Mesh(merge(list), mat); m.castShadow = !!shadow; m.receiveShadow = true; X.scene.add(m); };
   mesh(gw, X.mWin); mesh(gr, X.mWinRef); mesh(gs, new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: .7 }), true); }
+X.turb.userData.roof.material.color.set(0xc77f5c);
 /* campanile : fût blanc, corniche, lanternon à coupole */
 const white = new THREE.MeshStandardMaterial({ color: 0xfbf9f3, map: plaster, roughness: .9 });
 X.tw.material = white; X.cap.visible = false; X.bellM.material = new THREE.MeshStandardMaterial({ color: 0x3a3d40, roughness: .8 }); X.bellM.scale.set(.72, 1, 1.02);
@@ -54,11 +56,13 @@ function blob(r, det, amp, seed, cy, dark) { const g = new THREE.IcosahedronGeom
 function trunk(h, r) { const g = new THREE.CylinderGeometry(r * .7, r, h, 6).toNonIndexed(); g.translate(0, h / 2, 0); const n = g.attributes.position.count, col = new Float32Array(n * 3); for (let i = 0; i < n; i++) { col[i * 3] = .55; col[i * 3 + 1] = .38; col[i * 3 + 2] = .26; } g.setAttribute("color", new THREE.BufferAttribute(col, 3)); return g; }
 const b1 = blob(3.1, 1, .34, 1, 6.2, .42), b2g = blob(2.3, 0, .3, 2, 5.0, .42), b3 = blob(2.1, 1, .34, 3, 5.3, .42); b2g.translate(1.9, 0, .8); b3.translate(-1.5, .4, -1.3);
 X.pines.geometry = merge([trunk(4.4, .5), b1, b2g]);       // deux masses de feuillage : assez pour la silhouette, deux fois moins de triangles
-X.pines.material = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: .95 });
-const tint = new THREE.Color(); for (let i = 0; i < X.pines.count; i++) { tint.setHSL(.23 + rnd(i, 6) * .07, .34 + rnd(i, 7) * .16, .13 + rnd(i, 8) * .08); X.pines.setColorAt(i, tint); } X.pines.instanceColor.needsUpdate = true;
-X.bush.geometry = strip(blob(1.8, 1, .4, 5, 0, .5)); X.bush.castShadow = false; X.bush.material = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 1 });
-for (let i = 0; i < X.bush.count; i++) { tint.setHSL(.2 + rnd(i, 25) * .09, .32 + rnd(i, 26) * .16, .17 + rnd(i, 27) * .1); X.bush.setColorAt(i, tint); } X.bush.instanceColor.needsUpdate = true;
-X.orchard.geometry = strip(blob(2.5, 1, .3, 9, 0, .5)); X.orchard.material = new THREE.MeshStandardMaterial({ color: 0x7c8a58, vertexColors: true, roughness: 1 });
+/* feuillage : texture mouchetée (touffes claires, creux sombres) pour casser l'aspect lisse des volumes */
+const leaves = tex(256, (g, w) => { g.fillStyle = "#8f9a80"; g.fillRect(0, 0, w, w); for (let i = 0; i < 2600; i++) { const d = Math.random() < .45, v = d ? 40 + Math.random() * 50 : 150 + Math.random() * 90, r = 2 + Math.random() * 7; g.fillStyle = d ? `rgba(${v * .7},${v},${v * .6},.5)` : `rgba(${v * .9},${v},${v * .72},.42)`; g.beginPath(); g.ellipse(Math.random() * w, Math.random() * w, r, r * .6, Math.random() * 3, 0, 6.3); g.fill(); } }, 3);
+X.pines.material = new THREE.MeshStandardMaterial({ color: 0xffffff, map: leaves, vertexColors: true, roughness: .95 });
+const tint = new THREE.Color(); for (let i = 0; i < X.pines.count; i++) { tint.setHSL(.21 + rnd(i, 6) * .07, .28 + rnd(i, 7) * .14, .27 + rnd(i, 8) * .12); X.pines.setColorAt(i, tint); } X.pines.instanceColor.needsUpdate = true;
+X.bush.geometry = strip(blob(1.8, 1, .4, 5, 0, .5)); X.bush.castShadow = false; X.bush.material = new THREE.MeshStandardMaterial({ color: 0xffffff, map: leaves, vertexColors: true, roughness: 1 });
+for (let i = 0; i < X.bush.count; i++) { tint.setHSL(.17 + rnd(i, 25) * .1, .24 + rnd(i, 26) * .16, .3 + rnd(i, 27) * .12); X.bush.setColorAt(i, tint); } X.bush.instanceColor.needsUpdate = true;
+X.orchard.geometry = strip(blob(2.5, 1, .3, 9, 0, .5)); X.orchard.material = new THREE.MeshStandardMaterial({ color: 0xb4bf9a, map: leaves, vertexColors: true, roughness: 1 });
 /* rochers clairs dans le maquis */
 const NR = 520, rocks = new THREE.InstancedMesh(strip(blob(1, 0, .5, 11, 0, .7)), new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 1, flatShading: true }), NR), m4 = new THREE.Matrix4(), qt = new THREE.Quaternion();
 let ri = 0; for (let i = 0; i < 9000 && ri < NR; i++) { const x = (rnd(i, 71) - .5) * 640, z = (rnd(i, 72) - .5) * 640, r = Math.hypot(x, z); if (r < 62 || r > 320 || X.clear(x, z)) continue; if (X.fbm(x * .02 + 70, z * .02 + 3) < .52) continue; const h = X.height(x, z); if (h < 2) continue;
@@ -66,9 +70,25 @@ let ri = 0; for (let i = 0; i < 9000 && ri < NR; i++) { const x = (rnd(i, 71) - 
 rocks.count = ri; rocks.castShadow = rocks.receiveShadow = true; X.scene.add(rocks); X.rocks = rocks;
 
 /* ---------- sol, mer, lointain ---------- */
-X.terrain.material.map = tex(512, (g, w) => { g.fillStyle = "#c9cdb6"; g.fillRect(0, 0, w, w); for (let i = 0; i < 5200; i++) { const v = 150 + Math.random() * 90, r = 2 + Math.random() * 13; g.fillStyle = `rgba(${v * .86},${v},${v * .7},.28)`; g.beginPath(); g.arc(Math.random() * w, Math.random() * w, r, 0, 6.3); g.fill(); }
-  for (let i = 0; i < 9000; i++) { const v = 120 + Math.random() * 120; g.fillStyle = `rgba(${v},${v},${v * .8},.35)`; g.fillRect(Math.random() * w, Math.random() * w, 1.5, 1.5); } }, 46);
-X.terrain.material.color.set(0xb9bfa2); X.terrain.material.needsUpdate = true;
-const sea = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000), new THREE.MeshBasicMaterial({ color: 0x3d9fbe })); sea.rotation.x = -Math.PI / 2; sea.position.y = -8; X.scene.add(sea); X.sea = sea;
+X.terrain.material.map = tex(512, (g, w) => { g.fillStyle = "#b9b7a2"; g.fillRect(0, 0, w, w);
+  for (let i = 0; i < 260; i++) { const r = 18 + Math.random() * 60, k = Math.random(); g.fillStyle = k < .4 ? "rgba(150,138,96,.22)" : k < .75 ? "rgba(70,92,58,.24)" : "rgba(196,190,170,.2)"; g.beginPath(); g.ellipse(Math.random() * w, Math.random() * w, r, r * (.5 + Math.random() * .5), Math.random() * 3, 0, 6.3); g.fill(); }   // plaques d'herbe sèche, de maquis ras, de sol nu
+  for (let i = 0; i < 6000; i++) { const v = 110 + Math.random() * 120, r = 1 + Math.random() * 5; g.fillStyle = `rgba(${v * .92},${v},${v * .72},.3)`; g.beginPath(); g.arc(Math.random() * w, Math.random() * w, r, 0, 6.3); g.fill(); }
+  for (let i = 0; i < 12000; i++) { const v = 90 + Math.random() * 150; g.fillStyle = `rgba(${v},${v},${v * .82},.34)`; g.fillRect(Math.random() * w, Math.random() * w, 1.4, 1.4); } }, 26);
+X.terrain.material.color.set(0xc4c6ac); X.terrain.material.needsUpdate = true;
+
+/* ---------- cohérence : rien ne pousse dans le torrent, sur la conduite, la route ou au pied des pylônes ---------- */
+{ const avoid = [], add = (c, n, r) => { for (let i = 0; i <= n; i++) { const p = c.getPoint(i / n); avoid.push([p.x, p.z, r]); } };
+  add(X.streamC, 300, 9.5); add(X.penC, 120, 6);
+  add(new THREE.CatmullRomCurve3([[30, -34], [48, -60], [40, -100], [70, -140], [60, -200], [110, -260], [100, -340], [150, -430]].map(q => V(q[0], 0, q[1]))), 200, 8);
+  X.tops.forEach(p => avoid.push([p.x, p.z, 9])); avoid.push([X.VIG.x, X.VIG.z, 8], [-96, 44, 10]);
+  const bad = (x, z, extra) => avoid.some(a => (x - a[0]) ** 2 + (z - a[1]) ** 2 < (a[2] + extra) ** 2), mm = new THREE.Matrix4(), pp = new THREE.Vector3(), cc = new THREE.Color();
+  [[X.pines, 0], [X.bush, -3], [rocks, -4]].forEach(([im, extra]) => { let k = 0; for (let i = 0; i < im.count; i++) { im.getMatrixAt(i, mm); pp.setFromMatrixPosition(mm); if (bad(pp.x, pp.z, extra)) continue; im.getColorAt(i, cc); im.setMatrixAt(k, mm); im.setColorAt(k, cc); k++; } im.count = k; im.instanceMatrix.needsUpdate = true; im.instanceColor.needsUpdate = true; }); }
+
+/* ---------- torrent : un lit d'eau plat et sombre plutôt qu'un tube bleu ---------- */
+{ const g = X.water.geometry, p = g.attributes.position, rs = 9, n = p.count / rs; for (let s_ = 0; s_ < n; s_++) { let cx = 0, cy = 0, cz = 0; for (let k = 0; k < rs; k++) { const i = s_ * rs + k; cx += p.getX(i); cy += p.getY(i); cz += p.getZ(i); } cx /= rs; cy /= rs; cz /= rs;
+    for (let k = 0; k < rs; k++) { const i = s_ * rs + k; p.setXYZ(i, cx + (p.getX(i) - cx) * 1.7, cy - .35 + (p.getY(i) - cy) * .16, cz + (p.getZ(i) - cz) * 1.7); } } p.needsUpdate = true; g.computeVertexNormals();
+  X.water.material.color.set(0x41707f); X.water.material.roughness = .12; X.water.material.metalness = .2; X.water.material.opacity = .96; X.water.receiveShadow = true; }
+
+const sea = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000), new THREE.MeshBasicMaterial({ color: 0x3288a8 })); sea.rotation.x = -Math.PI / 2; sea.position.y = -8; X.scene.add(sea); X.sea = sea;
 X.camera.far = 7000; X.camera.updateProjectionMatrix();
 };

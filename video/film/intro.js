@@ -72,7 +72,7 @@ Object.assign(sun.shadow.camera, { left: -150, right: 150, top: 190, bottom: -19
 const island = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ vertexColors: true, map: landTex, roughness: .95 }));
 { const uv = geo.attributes.uv; for (let i = 0; i < P.count; i++) uv.setXY(i, (P.getX(i) - x0) / (x1 - x0), 1 - (P.getZ(i) - z0) / (z1 - z0)); }
 island.castShadow = island.receiveShadow = true; scene.add(island);
-const sea = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000), new THREE.MeshBasicMaterial({ color: 0x4fb2cf })); sea.rotation.x = -Math.PI / 2; sea.position.y = -.05; window.__dbg.sea = sea; window.__dbg.scene = scene; window.__dbg.r = renderer; sea.receiveShadow = true; scene.add(sea);
+const sea = new THREE.Mesh(new THREE.PlaneGeometry(9000, 9000), new THREE.MeshBasicMaterial({ color: 0x3f97b6 })); sea.rotation.x = -Math.PI / 2; sea.position.y = -.05; window.__dbg.sea = sea; window.__dbg.scene = scene; window.__dbg.r = renderer; sea.receiveShadow = true; scene.add(sea);
 /* terres voisines (Sardaigne, côtes italienne et française) : à plat, en retrait */
 const far = new THREE.MeshStandardMaterial({ color: 0x9fb090, roughness: 1 });
 med.forEach(r => { if (r.length < 4) return; const cxm = r.reduce((s, p) => s + p[0], 0) / r.length, czm = r.reduce((s, p) => s + p[1], 0) / r.length;

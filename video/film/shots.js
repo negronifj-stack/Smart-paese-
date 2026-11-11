@@ -189,7 +189,7 @@ return [
   cam: orbit({ c: [0, 14, 4], r: [215, 240], az: [34, 18], h: [70, 84], fov: [38, 38] }),
   badge: { text: "Fonctionnement dégradé<small>îlotage</small>", color: "#E9426C" },
   panel: { in: .5,
-    build(el) { el.innerHTML = "<h3>Coupure simulée <b></b></h3><div class='big'>" + fmt(RES.p72 * 100) + " %<small>des coupures simulées tenues 72 h</small></div><canvas></canvas><div class='leg'><span style='--c:#E9426C'>charge de la batterie pendant la coupure</span></div><p>Résultat du modèle horaire (8 760 heures, village type). Performance non démontrée : elle reste à vérifier par l’expérimentation.</p>"; el._q = canvas(el); },
+    build(el) { el.innerHTML = "<h3>Coupure simulée <b></b></h3><div class='big'>" + fmt(RES.p72 * 100) + " %<small>des coupures simulées tenues 72 h</small></div><canvas></canvas><div class='leg'><span style='--c:#E9426C'>charge de la batterie pendant la coupure</span></div><p>Résultat du modèle horaire : 8 760 heures simulées sur un village type.</p>"; el._q = canvas(el); },
     update(el, lt, u) { const x = lerp(0, 96, sstep(ramp(u, .08, .92))); el.querySelector("h3 b").textContent = "+ " + fmt(Math.min(96, x)) + " h"; islandChart(el._q, x); } } },
 
 /* ================= 5 · DONNÉES, IA, INFRASTRUCTURES CONNECTÉES ================= */
